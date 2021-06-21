@@ -67,7 +67,7 @@ def post_slack(name, url, icon, result):
                 "image_url": result["image"],
                 "text": result["summary"],
                 "footer": "TechBlogSpider",
-                "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png",
+                "footer_icon": "https://i.imgur.com/6A4px3e.png",
                 "ts": result["published_time"]
             }
         ]
