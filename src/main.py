@@ -6,7 +6,7 @@ import json
 import requests
 import feedparser
 import harperdb
-from opengraph import opengraph
+import opengraph_py3
 
 HARPERDB_URL = os.getenv("HARPERDB_URL")
 HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
@@ -83,7 +83,7 @@ def get_entry(url: str, time: int):
             published_time = datetime(*entry.updated_parsed[:6])
         td = last_indexed_publish_time - published_time
         if math.floor(td.total_seconds()) < 0:
-            ogp = opengraph.OpenGraph(url=entry.link)
+            ogp = opengraph_py3.OpenGraph(url=entry.link)
             if ogp.is_valid():
                 result.append({"link": entry.link, "title": entry.title, "summary": html_tag.sub("", entry.summary), "published_time": math.floor(published_time.timestamp()), "image": ogp["image"]})
             else:
