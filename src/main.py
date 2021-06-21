@@ -6,6 +6,7 @@ import json
 import requests
 import feedparser
 import harperdb
+import opengraph
 
 HARPERDB_URL = os.getenv("HARPERDB_URL")
 HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
@@ -59,6 +60,7 @@ def post_slack(name, url, icon, result):
                 "color":"#EEEEEE",
                 "title": result["title"],
                 "title_link": result["link"],
+                "image_url": result["image"],
                 "text": result["summary"],
                 "footer": "TechBlogSubscriber",
                 "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png",
@@ -75,14 +77,17 @@ def get_entry(url: str, time: int):
     published_time = None
     last_indexed_publish_time = datetime.fromtimestamp(time)
     for entry in d.entries:
-        print(entry)
         if hasattr(entry, "published_parsed"):
             published_time = datetime(*entry.published_parsed[:6])
         elif hasattr(entry, "updated_parsed"):
             published_time = datetime(*entry.updated_parsed[:6])
         td = last_indexed_publish_time - published_time
         if math.floor(td.total_seconds()) < 0:
-            result.append({"link": entry.link, "title": entry.title, "summary": html_tag.sub("", entry.summary), "published_time": math.floor(published_time.timestamp())})
+            ogp = opengraph.OpenGraph(url=entry.link)
+            if ogp.is_valid():
+                result.append({"link": entry.link, "title": entry.title, "summary": html_tag.sub("", entry.summary), "published_time": math.floor(published_time.timestamp()), "image": ogp["image"]})
+            else:
+                result.append({"link": entry.link, "title": entry.title, "summary": html_tag.sub("", entry.summary), "published_time": math.floor(published_time.timestamp()), "image": "https://i.imgur.com/mfYPqRr.png"})
     sorted_result = sorted(result, key=lambda x: x['published_time'])
     if published_time is None or len(sorted_result) == 0:
         return sorted_result, math.floor(last_indexed_publish_time.timestamp())
