@@ -47,11 +47,14 @@ def update_last_published(name: str, time: int):
 
 
 def get_entry_urls():
-    return [{"name": x["name"], "url": x["url"], "icon": x["icon"]} for x in db.sql(f"select * from {HARPERDB_SCHEMA}.entry_urls")]
+    return [{"name": x["name"],
+             "url": x["url"],
+             "icon": x["icon"]} for x in db.sql(f"select * from {HARPERDB_SCHEMA}.entry_urls")]
 
 
 def post_slack(name, url, icon, result):
     payload = {
+        "username": name,
         "attachments": [
             {
                 "author_name": name,
@@ -63,7 +66,7 @@ def post_slack(name, url, icon, result):
                 "title_link": result["link"],
                 "image_url": result["image"],
                 "text": result["summary"],
-                "footer": "TechBlogSubscriber",
+                "footer": "TechBlogSpider",
                 "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png",
                 "ts": result["published_time"]
             }
@@ -86,9 +89,19 @@ def get_entry(url: str, time: int):
         if math.floor(td.total_seconds()) < 0:
             ogp = opengraph_py3.OpenGraph(url=entry.link)
             if ogp.is_valid():
-                result.append({"link": entry.link, "title": entry.title, "summary": html_tag.sub("", entry.summary), "published_time": math.floor(published_time.timestamp()), "image": ogp["image"]})
+                result.append(
+                    {"link": entry.link,
+                     "title": entry.title,
+                     "summary": html_tag.sub("", entry.summary),
+                     "published_time": math.floor(published_time.timestamp()),
+                     "image": ogp["image"]})
             else:
-                result.append({"link": entry.link, "title": entry.title, "summary": html_tag.sub("", entry.summary), "published_time": math.floor(published_time.timestamp()), "image": "https://i.imgur.com/mfYPqRr.png"})
+                result.append(
+                    {"link": entry.link,
+                     "title": entry.title,
+                     "summary": html_tag.sub("", entry.summary),
+                     "published_time": math.floor(published_time.timestamp()),
+                     "image": "https://i.imgur.com/mfYPqRr.png"})
     sorted_result = sorted(result, key=lambda x: x['published_time'])
     if published_time is None or len(sorted_result) == 0:
         return sorted_result, math.floor(last_indexed_publish_time.timestamp())
@@ -108,7 +121,7 @@ def main():
             else:
                 icons = favicon.get(entry["url"])
                 if len(icons) == 0:
-                    icon = "https://i.imgur.com/JLuK99W.png"
+                    icon = ""
                 else:
                     icon = icons[0].url
             post_slack(entry["name"], entry["url"], icon, r)
