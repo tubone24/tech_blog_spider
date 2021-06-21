@@ -5,7 +5,7 @@ HARPERDB_URL = os.getenv("HARPERDB_URL")
 HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
 HARPERDB_PASSWORD = os.getenv("HARPERDB_PASSWORD")
 HARPERDB_SCHEMA = os.getenv("HARPERDB_SCHEMA", "prd")
-FILEPATH = "entry.csv"
+FILEPATH = "../entry.csv"
 
 db = harperdb.HarperDB(
     url=HARPERDB_URL,
