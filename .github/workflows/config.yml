@@ -1,4 +1,4 @@
-name: Generate Word Cloud
+name: Set Config
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
       - name: Install Dependencies
         run:
           pip install -r requirements.txt
-      - name: Run RSS
+      - name: set config
         env:
           HARPERDB_URL: ${{ secrets.HARPERDB_URL }}
           HARPERDB_USERNAME: ${{ secrets.HARPERDB_USERNAME }}

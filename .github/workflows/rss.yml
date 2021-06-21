@@ -1,4 +1,4 @@
-name: Generate Word Cloud
+name: Run Subscriber
 
 on:
   push:
