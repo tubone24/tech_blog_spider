@@ -97,7 +97,7 @@ def main():
             time = insert_last_published(entry["name"])
         result, new_time = get_entry(entry["url"], time)
         for r in result:
-            icon = entry["icon"] if entry["icon"] is not None else "https://i.imgur.com/JLuK99W.png"
+            icon = entry["icon"] if entry["icon"] is not None or entry["icon"] == "" else "https://i.imgur.com/JLuK99W.png"
             post_slack(entry["name"], entry["url"], icon, r)
         update_last_published(entry["name"], new_time)
 
