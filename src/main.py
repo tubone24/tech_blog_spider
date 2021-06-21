@@ -6,7 +6,7 @@ import json
 import requests
 import feedparser
 import harperdb
-import opengraph
+from opengraph import opengraph
 
 HARPERDB_URL = os.getenv("HARPERDB_URL")
 HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
