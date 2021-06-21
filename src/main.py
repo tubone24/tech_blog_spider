@@ -7,6 +7,7 @@ import requests
 import feedparser
 import harperdb
 import opengraph_py3
+import favicon
 
 HARPERDB_URL = os.getenv("HARPERDB_URL")
 HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
@@ -102,7 +103,14 @@ def main():
             time = insert_last_published(entry["name"])
         result, new_time = get_entry(entry["url"], time)
         for r in result:
-            icon = entry["icon"] if entry["icon"] is not None or entry["icon"] == "" else "https://i.imgur.com/JLuK99W.png"
+            if entry["icon"] is not None or entry["icon"] == "":
+                icon = entry["icon"]
+            else:
+                icons = favicon.get(entry["url"])
+                if len(icons) == 0:
+                    icon = "https://i.imgur.com/JLuK99W.png"
+                else:
+                    icon = icons[0].url
             post_slack(entry["name"], entry["url"], icon, r)
         update_last_published(entry["name"], new_time)
 
