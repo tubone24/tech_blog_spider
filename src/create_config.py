@@ -12,4 +12,4 @@ db = harperdb.HarperDB(
     username=HARPERDB_USERNAME,
     password=HARPERDB_PASSWORD,)
 
-db.csv_file_load(HARPERDB_SCHEMA, "entry_urls", FILEPATH, action="upsert")
+db.csv_data_load(HARPERDB_SCHEMA, "entry_urls", FILEPATH, action="upsert")
