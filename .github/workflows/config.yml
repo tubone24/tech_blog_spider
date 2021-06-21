@@ -3,7 +3,14 @@ name: Generate Word Cloud
 on:
   push:
     branches:
-      - config
+      - main
+    paths:
+      - "entry.csv"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "entry.csv"
 
 jobs:
   SetConfig:
