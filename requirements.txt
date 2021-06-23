@@ -3,3 +3,4 @@ feedparser==6.0.6
 requests==2.25.1
 opengraph-py3==0.71
 favicon==0.7.0
+retrying==1.3.3

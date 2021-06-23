@@ -1,3 +1,4 @@
+import urllib.error
 from datetime import datetime
 import math
 import re
@@ -8,6 +9,7 @@ import feedparser
 import harperdb
 import opengraph_py3
 import favicon
+from retrying import retry
 
 HARPERDB_URL = os.getenv("HARPERDB_URL")
 HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
@@ -87,25 +89,26 @@ def get_entry(url: str, time: int):
             published_time = datetime(*entry.updated_parsed[:6])
         td = last_indexed_publish_time - published_time
         if math.floor(td.total_seconds()) < 0:
-            ogp = opengraph_py3.OpenGraph(url=entry.link)
-            if ogp.is_valid():
-                result.append(
-                    {"link": entry.link,
-                     "title": entry.title,
-                     "summary": html_tag.sub("", entry.summary),
-                     "published_time": math.floor(published_time.timestamp()),
-                     "image": ogp["image"]})
-            else:
-                result.append(
-                    {"link": entry.link,
-                     "title": entry.title,
-                     "summary": html_tag.sub("", entry.summary),
-                     "published_time": math.floor(published_time.timestamp()),
-                     "image": "https://i.imgur.com/mfYPqRr.png"})
+            image = get_ogp_image(entry.link)
+            result.append(
+                {"link": entry.link,
+                 "title": entry.title,
+                 "summary": html_tag.sub("", entry.summary),
+                 "published_time": math.floor(published_time.timestamp()),
+                 "image": image})
     sorted_result = sorted(result, key=lambda x: x['published_time'])
     if published_time is None or len(sorted_result) == 0:
         return sorted_result, math.floor(last_indexed_publish_time.timestamp())
     return sorted_result, math.floor(sorted_result[-1]["published_time"])
+
+
+@retry(wait_exponential_multiplier=1000, wait_exponential_max=10000)
+def get_ogp_image(link: str):
+    ogp = opengraph_py3.OpenGraph(url=link)
+    if ogp.is_valid():
+        return ogp["image"]
+    else:
+        return "https://i.imgur.com/mfYPqRr.png"
 
 
 def main():
@@ -114,7 +117,11 @@ def main():
             time = get_last_published(entry["name"])
         except EmptyLastPublishedRecordError:
             time = insert_last_published(entry["name"])
-        result, new_time = get_entry(entry["url"], time)
+        try:
+            result, new_time = get_entry(entry["url"], time)
+        except:
+            print(f"Can not get Entry: {entry['url']}")
+            continue
         for r in result:
             if entry["icon"] is not None or entry["icon"] == "":
                 icon = entry["icon"]
