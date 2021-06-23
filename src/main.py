@@ -119,7 +119,6 @@ def get_ogp_image(link: str):
         return "https://i.imgur.com/mfYPqRr.png"
 
 
-@retry(wait_exponential_multiplier=1000, wait_exponential_max=10000)
 def get_favicon(link):
     icons = favicon.get(link)
     if len(icons) == 0:
