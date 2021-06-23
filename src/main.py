@@ -89,7 +89,10 @@ def get_entry(url: str, time: int):
             published_time = datetime(*entry.updated_parsed[:6])
         td = last_indexed_publish_time - published_time
         if math.floor(td.total_seconds()) < 0:
-            image = get_ogp_image(entry.link)
+            try:
+                image = get_ogp_image(entry.link)
+            except urllib.error.HTTPError:
+                image = "https://i.imgur.com/mfYPqRr.png"
             result.append(
                 {"link": entry.link,
                  "title": entry.title,
@@ -111,6 +114,15 @@ def get_ogp_image(link: str):
         return "https://i.imgur.com/mfYPqRr.png"
 
 
+@retry(wait_exponential_multiplier=1000, wait_exponential_max=10000)
+def get_favicon(link):
+    icons = favicon.get(link)
+    if len(icons) == 0:
+        return ""
+    else:
+        return icons[0].url
+
+
 def main():
     for entry in get_entry_urls():
         try:
@@ -119,18 +131,18 @@ def main():
             time = insert_last_published(entry["name"])
         try:
             result, new_time = get_entry(entry["url"], time)
-        except:
-            print(f"Can not get Entry: {entry['url']}")
+        except Exception  as e:
+            print(f"Can not get Entry: {entry['url']}: {e}")
             continue
         for r in result:
             if entry["icon"] is not None or entry["icon"] == "":
                 icon = entry["icon"]
             else:
-                icons = favicon.get(entry["url"])
-                if len(icons) == 0:
+                try:
+                    icon = get_favicon(entry["url"])
+                except Exception as e:
+                    print(f"Can not get Entry Favicon {entry['url']}:   {e}")
                     icon = ""
-                else:
-                    icon = icons[0].url
             post_slack(entry["name"], entry["url"], icon, r)
         update_last_published(entry["name"], new_time)
 
