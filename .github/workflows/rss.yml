@@ -35,4 +35,5 @@ jobs:
           HARPERDB_PASSWORD: ${{ secrets.HARPERDB_PASSWORD }}
           HARPERDB_SCHEMA: ${{ secrets.HARPERDB_SCHEMA }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          LOGGING_LEVEL: "DEBUG"
         run: python3 src/main.py
