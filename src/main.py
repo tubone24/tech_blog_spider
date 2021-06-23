@@ -4,6 +4,7 @@ import math
 import re
 import os
 import json
+import logging
 import requests
 import feedparser
 import harperdb
@@ -16,6 +17,7 @@ HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
 HARPERDB_PASSWORD = os.getenv("HARPERDB_PASSWORD")
 HARPERDB_SCHEMA = os.getenv("HARPERDB_SCHEMA", "prd")
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
+LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", "INFO")
 
 
 db = harperdb.HarperDB(
@@ -24,6 +26,9 @@ db = harperdb.HarperDB(
     password=HARPERDB_PASSWORD,)
 
 html_tag = re.compile(r"<[^>]*?>")
+
+logger = logging.getLogger(__name__)
+logger.setLevel(LOGGING_LEVEL)
 
 
 class EmptyLastPublishedRecordError(BaseException):
@@ -125,6 +130,7 @@ def get_favicon(link):
 
 def main():
     for entry in get_entry_urls():
+        logger.debug(f"Start Entry: {entry['name']}")
         try:
             time = get_last_published(entry["name"])
         except EmptyLastPublishedRecordError:
@@ -132,7 +138,7 @@ def main():
         try:
             result, new_time = get_entry(entry["url"], time)
         except Exception  as e:
-            print(f"Can not get Entry: {entry['url']}: {e}")
+            logger.warning(f"Can not get Entry: {entry['url']}: {e}")
             continue
         for r in result:
             if entry["icon"] is not None or entry["icon"] == "":
@@ -141,7 +147,7 @@ def main():
                 try:
                     icon = get_favicon(entry["url"])
                 except Exception as e:
-                    print(f"Can not get Entry Favicon {entry['url']}:   {e}")
+                    logger.warning(f"Can not get Entry Favicon {entry['url']}:   {e}")
                     icon = ""
             post_slack(entry["name"], entry["url"], icon, r)
         update_last_published(entry["name"], new_time)
