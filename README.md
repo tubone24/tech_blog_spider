@@ -18,6 +18,10 @@ There are similar mechanisms such as Slack's /feed and RSS registration using IF
 
 Therefore, I decided to use GitHub Actions and Harper DB, which are free for OSS.
 
+### Why Spider?
+
+It doesn't have any particular meaning, but I imagined a spider running around on a tech blog (the web). But that's a crawler, isn't it?
+
 ## Setup
 
 ### Preparing Harper DB
@@ -51,11 +55,11 @@ name,url,icon
 
 ### Create Slack incoming webhook
 
-
+Slack incoming webhooks using the new Slack API, Apps, consume Apps, so I added a custom integration.
 
 ### Set environment
 
-Set environment the below.
+Set environment (OS Env) the below.
 
 | name              | descriotion                                           | default | 
 | ----------------- | ----------------------------------------------------- | ------- | 
@@ -64,4 +68,7 @@ Set environment the below.
 | HARPERDB_PASSWORD | HarperDB password                                     | -       | 
 | HARPERDB_SCHEMA   | HarperDB schemas                                      | prd     | 
 | SLACK_WEBHOOK_URL | Slack incoming webhook url                            | -       | 
-| LOGGING_LEVEL     | Logging level (CRITICAL, ERROR, WARNING, INFO, DEBUG) | INFO    | 
+| LOGGING_LEVEL     | Logging level (CRITICAL, ERROR, WARNING, INFO, DEBUG) | INFO    |
+
+## Demo
+
