@@ -110,12 +110,15 @@ def get_entry(url: str, time: int):
     return sorted_result, math.floor(sorted_result[-1]["published_time"])
 
 
-# @retry(wait_exponential_multiplier=1000, wait_exponential_max=10000)
+# @retry(wait_exponential_multiplier=1000, wait_exponential_max=4000)
 def get_ogp_image(link: str):
-    ogp = opengraph_py3.OpenGraph(url=link)
-    if ogp.is_valid():
-        return ogp["image"]
-    else:
+    try:
+        ogp = opengraph_py3.OpenGraph(url=link)
+        if ogp.is_valid():
+            return ogp["image"]
+        else:
+            return "https://i.imgur.com/mfYPqRr.png"
+    except AttributeError as e:
         return "https://i.imgur.com/mfYPqRr.png"
 
 
