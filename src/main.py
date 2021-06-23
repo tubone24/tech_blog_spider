@@ -129,6 +129,7 @@ def get_favicon(link):
 
 def main():
     for entry in get_entry_urls():
+        print(f"Start Entry: {entry['name']}")
         logger.debug(f"Start Entry: {entry['name']}")
         try:
             time = get_last_published(entry["name"])
