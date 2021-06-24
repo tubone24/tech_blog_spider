@@ -1,6 +1,6 @@
 # Tech Blog Spider
 
-![logo](docs/images/logo.svg)
+![logo](docs/images/logo.png)
 
 > Crawls tech blogs and notifies you via Slack
 
@@ -70,5 +70,48 @@ Set environment (OS Env) the below.
 | SLACK_WEBHOOK_URL | Slack incoming webhook url                            | -       | 
 | LOGGING_LEVEL     | Logging level (CRITICAL, ERROR, WARNING, INFO, DEBUG) | INFO    |
 
+#### How to use it in GitHub Actions
+
+For example, when setting environment variables in GitHub Actions, it is recommended to register the environment variable itself in the secret and refer to it from the secret as shown below.
+
+```yaml
+- name: Run RSS
+  env:
+    HARPERDB_URL: ${{ secrets.HARPERDB_URL }}
+    HARPERDB_USERNAME: ${{ secrets.HARPERDB_USERNAME }}
+    HARPERDB_PASSWORD: ${{ secrets.HARPERDB_PASSWORD }}
+    HARPERDB_SCHEMA: ${{ secrets.HARPERDB_SCHEMA }}
+    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    LOGGING_LEVEL: "DEBUG"
+  run: python3 src/main.py
+```
+
+### Install Dependencies
+
+The required libraries are listed in requirements.txt and can be installed by pip.
+
+```
+pip install -r requirements.txt
+```
+
+## Usage
+
+### Preparation
+
+```
+python src/create_config.py
+```
+
+### Run
+
+```
+python src/main.py
+```
+
 ## Demo
 
+![img](docs/images/demo.png)
+
+## License
+
+[MIT © tubone.](LICENSE)
