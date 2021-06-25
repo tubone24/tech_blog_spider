@@ -11,6 +11,9 @@ import harperdb
 import opengraph_py3
 import favicon
 from retrying import retry
+from janome.tokenizer import Tokenizer
+import termextract.janome
+import termextract.core
 
 HARPERDB_URL = os.getenv("HARPERDB_URL")
 HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
@@ -94,6 +97,7 @@ def get_entry(url: str, time: int):
             published_time = datetime(*entry.updated_parsed[:6])
         td = last_indexed_publish_time - published_time
         if math.floor(td.total_seconds()) < 0:
+            extract_keyword(entry.summary)
             try:
                 image = get_ogp_image(entry.link)
             except urllib.error.HTTPError:
@@ -108,6 +112,18 @@ def get_entry(url: str, time: int):
     if published_time is None or len(sorted_result) == 0:
         return sorted_result, math.floor(last_indexed_publish_time.timestamp())
     return sorted_result, math.floor(sorted_result[-1]["published_time"])
+
+
+def extract_keyword(text):
+    t = Tokenizer()
+    tokenize_text = t.tokenize(text)
+    frequency = termextract.janome.cmp_noun_dict(tokenize_text)
+    lr = termextract.core.score_lr(
+        frequency,
+        ignore_words=termextract.janome.IGNORE_WORDS,
+        lr_mode=1, average_rate=1)
+    term_imp = termextract.core.term_importance(frequency, lr)
+    print(term_imp)
 
 
 @retry(wait_exponential_multiplier=1000, wait_exponential_max=4000)
