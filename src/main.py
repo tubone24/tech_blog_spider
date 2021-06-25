@@ -32,6 +32,8 @@ db = harperdb.HarperDB(
 
 html_tag = re.compile(r"<[^>]*?>")
 
+t = Tokenizer()
+
 logger = logging.getLogger(__name__)
 logger.setLevel(LOGGING_LEVEL)
 
@@ -120,7 +122,6 @@ def get_entry(url: str, time: int):
 
 
 def extract_keyword(text):
-    t = Tokenizer()
     tokenize_text = t.tokenize(text)
     frequency = termextract.janome.cmp_noun_dict(tokenize_text)
     lr = termextract.core.score_lr(
@@ -174,7 +175,7 @@ def main():
             logger.warning(f"Can not get Entry: {entry['url']}: {e}")
             continue
         for r in result:
-            if entry["icon"] is not None or entry["icon"] == "":
+            if entry["icon"] is not None or entry["icon"] != "":
                 icon = entry["icon"]
             else:
                 try:
