@@ -127,8 +127,8 @@ def extract_keyword(text):
         lr_mode=1, average_rate=1)
     term_imp = termextract.core.term_importance(frequency, lr)
     score_sorted_term_imp = sorted(term_imp.items(), key=lambda x: x[1], reverse=True)
-    print(score_sorted_term_imp[:2])
-    return score_sorted_term_imp[:2]
+    logger.debug(f"keywords: {score_sorted_term_imp}")
+    return score_sorted_term_imp[:6]
 
 
 @retry(wait_exponential_multiplier=1000, wait_exponential_max=4000)
