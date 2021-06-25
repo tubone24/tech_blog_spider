@@ -63,10 +63,7 @@ def get_entry_urls():
 
 
 def post_slack(name, url, icon, result):
-    fields = []
-    for keyword in result["keywords"]:
-        for k, v in keyword.items():
-            fields.append({"title": k, "value": v, "short": "true"})
+    fields = [{"title": x[0], "value": x[1], "short": "true"} for x in result["keywords"]]
     payload = {
         "username": name,
         "attachments": [
@@ -129,7 +126,7 @@ def extract_keyword(text):
         ignore_words=termextract.janome.IGNORE_WORDS,
         lr_mode=1, average_rate=1)
     term_imp = termextract.core.term_importance(frequency, lr)
-    score_sorted_term_imp = sorted(term_imp.items(), key=lambda x: x[1])
+    score_sorted_term_imp = sorted(term_imp.items(), key=lambda x: x[1], reverse=True)
     print(score_sorted_term_imp[:2])
     return score_sorted_term_imp[:2]
 
