@@ -14,6 +14,8 @@ from retrying import retry
 from janome.tokenizer import Tokenizer
 import termextract.janome
 import termextract.core
+from bs4 import BeautifulSoup
+import urllib.request as req
 
 HARPERDB_URL = os.getenv("HARPERDB_URL")
 HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
@@ -99,7 +101,7 @@ def get_entry(url: str, time: int):
             published_time = datetime(*entry.updated_parsed[:6])
         td = last_indexed_publish_time - published_time
         if math.floor(td.total_seconds()) < 0:
-            keywords = extract_keyword(html_tag.sub("", entry.summary))
+            keywords = extract_keyword(extract_html_text(entry.link))
             try:
                 image = get_ogp_image(entry.link)
             except urllib.error.HTTPError:
@@ -129,6 +131,14 @@ def extract_keyword(text):
     score_sorted_term_imp = sorted(term_imp.items(), key=lambda x: x[1], reverse=True)
     logger.debug(f"keywords: {score_sorted_term_imp}")
     return score_sorted_term_imp[:6]
+
+
+def extract_html_text(url):
+    res = req.urlopen(url)
+    soup = BeautifulSoup(res, "html.parser")
+    p_tag_list = soup.find_all("p")
+    return " ".join([p.get_text() for p in p_tag_list])
+
 
 
 @retry(wait_exponential_multiplier=1000, wait_exponential_max=4000)
