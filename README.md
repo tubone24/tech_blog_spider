@@ -34,6 +34,8 @@ It doesn't have any particular meaning, but I imagined a spider running around o
   
 - It is easy to automate; This repository uses [GitHub Actions](.github/workflows/rss.yml) to automate the process. And it's free.
 
+- You can use [pytermextract](http://gensen.dl.itc.u-tokyo.ac.jp/pytermextract/) to extract technical terms in an article and display them on Slack.
+
 ## Setup
 
 ### Preparing Harper DB
