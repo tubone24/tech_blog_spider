@@ -140,7 +140,6 @@ def extract_html_text(url):
     return " ".join([p.get_text() for p in p_tag_list])
 
 
-
 @retry(wait_exponential_multiplier=1000, wait_exponential_max=4000)
 def get_ogp_image(link: str):
     try:
@@ -171,7 +170,7 @@ def main():
             time = insert_last_published(entry["name"])
         try:
             result, new_time = get_entry(entry["url"], time)
-        except Exception  as e:
+        except Exception as e:
             logger.warning(f"Can not get Entry: {entry['url']}: {e}")
             continue
         for r in result:
