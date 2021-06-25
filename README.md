@@ -22,6 +22,18 @@ Therefore, I decided to use GitHub Actions and Harper DB, which are free for OSS
 
 It doesn't have any particular meaning, but I imagined a spider running around on a tech blog (the web). But that's a crawler, isn't it?
 
+## Feature
+
+- All free
+  - Not using Slack Apps, Slack feed and IFTTT; There is no upper limit to the numbers for free plans.
+  - Using HarperDB; a free plan exists.
+
+- Post feeds to Slack only when there is an update.
+
+- You can register an unlimited number of Feeds.
+  
+- It is easy to automate; This repository uses [GitHub Actions](.github/workflows/rss.yml) to automate the process. And it's free.
+
 ## Setup
 
 ### Preparing Harper DB
