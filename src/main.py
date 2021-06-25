@@ -63,6 +63,10 @@ def get_entry_urls():
 
 
 def post_slack(name, url, icon, result):
+    fields = []
+    for keyword in result["keywords"]:
+        for k, v in keyword.items():
+            fields.append({"title": k, "value": v, "short": "true"})
     payload = {
         "username": name,
         "attachments": [
@@ -78,7 +82,8 @@ def post_slack(name, url, icon, result):
                 "text": result["summary"],
                 "footer": "TechBlogSpider",
                 "footer_icon": "https://i.imgur.com/6A4px3e.png",
-                "ts": result["published_time"]
+                "ts": result["published_time"],
+                "fields": fields
             }
         ]
     }
@@ -97,7 +102,7 @@ def get_entry(url: str, time: int):
             published_time = datetime(*entry.updated_parsed[:6])
         td = last_indexed_publish_time - published_time
         if math.floor(td.total_seconds()) < 0:
-            extract_keyword(entry.summary)
+            keywords = extract_keyword(html_tag.sub("", entry.summary))
             try:
                 image = get_ogp_image(entry.link)
             except urllib.error.HTTPError:
@@ -107,7 +112,8 @@ def get_entry(url: str, time: int):
                  "title": entry.title,
                  "summary": html_tag.sub("", entry.summary),
                  "published_time": math.floor(published_time.timestamp()),
-                 "image": image})
+                 "image": image,
+                 "keywords": keywords})
     sorted_result = sorted(result, key=lambda x: x['published_time'])
     if published_time is None or len(sorted_result) == 0:
         return sorted_result, math.floor(last_indexed_publish_time.timestamp())
@@ -123,7 +129,9 @@ def extract_keyword(text):
         ignore_words=termextract.janome.IGNORE_WORDS,
         lr_mode=1, average_rate=1)
     term_imp = termextract.core.term_importance(frequency, lr)
-    print(term_imp)
+    score_sorted_term_imp = sorted(term_imp.items(), key=lambda x: x[1])
+    print(score_sorted_term_imp[:2])
+    return score_sorted_term_imp[:2]
 
 
 @retry(wait_exponential_multiplier=1000, wait_exponential_max=4000)
