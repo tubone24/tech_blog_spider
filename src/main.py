@@ -28,7 +28,7 @@ HARPERDB_PASSWORD = os.getenv("HARPERDB_PASSWORD")
 HARPERDB_SCHEMA = os.getenv("HARPERDB_SCHEMA", "prd")
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", "INFO")
-SLEEP_TIME = 1
+SLEEP_TIME = int(os.getenv("LOGGING_LEVEL", "1"))
 
 
 db = harperdb.HarperDB(

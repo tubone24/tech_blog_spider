@@ -45,4 +45,5 @@ jobs:
           HARPERDB_SCHEMA: ${{ secrets.HARPERDB_SCHEMA }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           LOGGING_LEVEL: "DEBUG"
+          SLEEP_TIME: "1"
         run: python3 src/main.py
