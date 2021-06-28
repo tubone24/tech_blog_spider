@@ -174,6 +174,11 @@ def get_ogp_image(link: str):
     except AttributeError as e:
         logger.debug(f"No Head contents: {e}")
         return ""
+    except urllib.error.HTTPError as e:
+        if e.code == 403:
+            return ""
+        else:
+            raise e
 
 
 def get_favicon(link):
