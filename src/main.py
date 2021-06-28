@@ -16,7 +16,7 @@ from janome.tokenizer import Tokenizer
 import termextract.janome
 import termextract.core
 from bs4 import BeautifulSoup
-import urllib.request as req
+import urllib.request
 from fasttext import load_model
 
 HARPERDB_URL = os.getenv("HARPERDB_URL")
@@ -154,7 +154,15 @@ def extract_keyword(text):
 
 def extract_html_text(url):
     try:
-        res = req.urlopen(url)
+        req = urllib.request.Request(
+            url,
+            data=None,
+            headers={
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) "
+                              "Chrome/35.0.1916.47 Safari/537.36 "
+            }
+        )
+        res = urllib.request.urlopen(req)
     except urllib.error.HTTPError as e:
         logger.warning(f"Can not get p tags: {e}")
         return ""
