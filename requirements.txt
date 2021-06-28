@@ -6,3 +6,4 @@ favicon==0.7.0
 retrying==1.3.3
 Janome==0.4.1
 beautifulsoup4==4.9.3
+nltk==3.6.2

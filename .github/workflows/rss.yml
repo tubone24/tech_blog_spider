@@ -34,6 +34,9 @@ jobs:
       - name: Install fastText
         run:
           sh scripts/install_fasttext.sh
+      - name: Activate NLTK
+        run:
+          python scripts/activate_nltk.py
       - name: Run RSS
         env:
           HARPERDB_URL: ${{ secrets.HARPERDB_URL }}
