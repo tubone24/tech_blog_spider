@@ -112,12 +112,14 @@ def get_entry(url: str, time: int):
             published_time = datetime(*entry.updated_parsed[:6])
         td = last_indexed_publish_time - published_time
         if math.floor(td.total_seconds()) < 0:
-            keywords = extract_keyword(extract_html_text(entry.link))
-            language = predict_language_for_fasttext(extract_html_text(entry.link))
+            text = extract_html_text(entry.link)
+            keywords = extract_keyword(text)
+            language = predict_language_for_fasttext(text)
             logger.warning(language[0][0])
             try:
                 image = get_ogp_image(entry.link)
-            except urllib.error.HTTPError:
+            except urllib.error.HTTPError as e:
+                logger.warning(f"Can not get OGP image: {e}")
                 image = "https://i.imgur.com/mfYPqRr.png"
             result.append(
                 {"link": entry.link,
@@ -146,7 +148,10 @@ def extract_keyword(text):
 
 
 def extract_html_text(url):
-    res = req.urlopen(url)
+    try:
+        res = req.urlopen(url)
+    except Exception as e: # ToDo: too large Exception
+        logger.warning(f"Can not get p tags: {e}")
     soup = BeautifulSoup(res, "html.parser")
     p_tag_list = soup.find_all("p")
     return " ".join([p.get_text() for p in p_tag_list])
