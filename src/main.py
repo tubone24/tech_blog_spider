@@ -1,5 +1,6 @@
 import urllib.error
 from datetime import datetime
+from time import sleep
 import math
 import re
 import os
@@ -24,6 +25,7 @@ HARPERDB_PASSWORD = os.getenv("HARPERDB_PASSWORD")
 HARPERDB_SCHEMA = os.getenv("HARPERDB_SCHEMA", "prd")
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", "INFO")
+SLEEP_TIME = 1
 
 
 db = harperdb.HarperDB(
@@ -112,7 +114,10 @@ def get_entry(url: str, time: int):
             published_time = datetime(*entry.updated_parsed[:6])
         td = last_indexed_publish_time - published_time
         if math.floor(td.total_seconds()) < 0:
+            sleep(SLEEP_TIME)
             text = extract_html_text(entry.link)
+            if text == "":
+                text = html_tag.sub("", entry.summary)
             keywords = extract_keyword(text)
             language = predict_language_for_fasttext(text)
             logger.warning(language[0][0])
@@ -150,8 +155,9 @@ def extract_keyword(text):
 def extract_html_text(url):
     try:
         res = req.urlopen(url)
-    except Exception as e: # ToDo: too large Exception
+    except urllib.error.HTTPError as e:
         logger.warning(f"Can not get p tags: {e}")
+        return ""
     soup = BeautifulSoup(res, "html.parser")
     p_tag_list = soup.find_all("p")
     return " ".join([p.get_text() for p in p_tag_list])
