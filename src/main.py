@@ -125,8 +125,10 @@ def get_entry(url: str, time: int):
             logger.debug(language)
             if language == "ja":
                 keywords = extract_keyword_japanese(text)
-            else:
+            elif language == "en":
                 keywords = extract_keyword_english(text)
+            else:
+                keywords = []
             try:
                 image = get_ogp_image(entry.link)
             except urllib.error.HTTPError as e:
