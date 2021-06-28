@@ -183,7 +183,8 @@ def get_ogp_image(link: str):
         logger.debug(f"No Head contents: {e}")
         return ""
     except urllib.error.HTTPError as e:
-        if e.code == 403:
+        if 400 <= e.code < 500:
+            # if 4xx Error, can not get OGP with urllib3 because of forbidden for crawler.
             return ""
         else:
             raise e
