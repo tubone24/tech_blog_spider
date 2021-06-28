@@ -105,6 +105,7 @@ def get_entry(url: str, time: int):
     published_time = None
     last_indexed_publish_time = datetime.fromtimestamp(time)
     for entry in d.entries:
+        logger.warning(entry.link)
         if hasattr(entry, "published_parsed"):
             published_time = datetime(*entry.published_parsed[:6])
         elif hasattr(entry, "updated_parsed"):
@@ -113,7 +114,7 @@ def get_entry(url: str, time: int):
         if math.floor(td.total_seconds()) < 0:
             keywords = extract_keyword(extract_html_text(entry.link))
             language = predict_language_for_fasttext(extract_html_text(entry.link))
-            print(language[0][0])
+            logger.warning(language[0][0])
             try:
                 image = get_ogp_image(entry.link)
             except urllib.error.HTTPError:
@@ -182,7 +183,7 @@ def main():
         try:
             result, new_time = get_entry(entry["url"], time)
         except Exception as e:
-            logger.warning(f"Can not get Entry: {entry['url']}: {e}")
+            logger.warning(f"Can not get Entry {entry['url']} {e}")
             continue
         for r in result:
             if entry["icon"] is not None or entry["icon"] != "":
@@ -191,7 +192,7 @@ def main():
                 try:
                     icon = get_favicon(entry["url"])
                 except Exception as e:
-                    logger.warning(f"Can not get Entry Favicon {entry['url']}:   {e}")
+                    logger.warning(f"Can not get Entry Favicon {entry['url']} {e}")
                     icon = ""
             post_slack(entry["name"], entry["url"], icon, r)
         update_last_published(entry["name"], new_time)
