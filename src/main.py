@@ -119,8 +119,8 @@ def get_entry(url: str, time: int):
             if text == "":
                 text = html_tag.sub("", entry.summary)
             keywords = extract_keyword(text)
-            language = predict_language_for_fasttext(text)
-            logger.warning(language[0][0])
+            language = predict_language_for_fasttext(text)[0][0]
+            logger.debug(language)
             try:
                 image = get_ogp_image(entry.link)
             except urllib.error.HTTPError as e:
@@ -128,7 +128,7 @@ def get_entry(url: str, time: int):
                 image = "https://i.imgur.com/mfYPqRr.png"
             result.append(
                 {"link": entry.link,
-                 "title": entry.title,
+                 "title": f"【{language}】{entry.title}",
                  "summary": html_tag.sub("", entry.summary),
                  "published_time": math.floor(published_time.timestamp()),
                  "image": image,
