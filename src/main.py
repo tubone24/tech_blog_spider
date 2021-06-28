@@ -16,6 +16,7 @@ import termextract.janome
 import termextract.core
 from bs4 import BeautifulSoup
 import urllib.request as req
+from fasttext import load_model
 
 HARPERDB_URL = os.getenv("HARPERDB_URL")
 HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
@@ -34,12 +35,19 @@ html_tag = re.compile(r"<[^>]*?>")
 
 t = Tokenizer()
 
+fasttext_model = load_model("lid.176.bin")
+
 logger = logging.getLogger(__name__)
 logger.setLevel(LOGGING_LEVEL)
 
 
 class EmptyLastPublishedRecordError(BaseException):
     pass
+
+
+def predict_language_for_fasttext(text, k=1):
+    label, score = fasttext_model.predict(text, k)
+    return list(zip([lang.replace("__label__", "") for lang in label], score))
 
 
 def get_last_published(name: str):
@@ -104,6 +112,8 @@ def get_entry(url: str, time: int):
         td = last_indexed_publish_time - published_time
         if math.floor(td.total_seconds()) < 0:
             keywords = extract_keyword(extract_html_text(entry.link))
+            language = predict_language_for_fasttext(extract_html_text(entry.link))
+            print(language[0][0])
             try:
                 image = get_ogp_image(entry.link)
             except urllib.error.HTTPError:

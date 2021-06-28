@@ -133,3 +133,6 @@ dmypy.json
 
 # mac
 .DS_Store
+
+# fasttext bin
+lid.176.bin
