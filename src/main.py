@@ -17,6 +17,7 @@ import termextract.janome
 import termextract.core
 from bs4 import BeautifulSoup
 import urllib.request
+from http.cookiejar import CookieJar
 from fasttext import load_model
 
 HARPERDB_URL = os.getenv("HARPERDB_URL")
@@ -119,7 +120,8 @@ def get_entry(url: str, time: int):
             if text == "":
                 text = html_tag.sub("", entry.summary)
             keywords = extract_keyword(text)
-            language = predict_language_for_fasttext(text)[0][0]
+            # https://github.com/facebookresearch/fastText/issues/1079
+            language = predict_language_for_fasttext(text.replace("\n", ""))[0][0]
             logger.debug(language)
             try:
                 image = get_ogp_image(entry.link)
@@ -162,7 +164,9 @@ def extract_html_text(url):
                               "Chrome/35.0.1916.47 Safari/537.36 "
             }
         )
-        res = urllib.request.urlopen(req)
+        cj = CookieJar()
+        opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+        res = opener.open(req).read()
     except urllib.error.HTTPError as e:
         logger.warning(f"Can not get p tags: {e}")
         return ""
