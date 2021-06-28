@@ -13,8 +13,10 @@ import opengraph_py3
 import favicon
 from retrying import retry
 from janome.tokenizer import Tokenizer
+import nltk
 import termextract.janome
 import termextract.core
+import termextract.english_postagger
 from bs4 import BeautifulSoup
 import urllib.request
 from http.cookiejar import CookieJar
@@ -108,21 +110,23 @@ def get_entry(url: str, time: int):
     published_time = None
     last_indexed_publish_time = datetime.fromtimestamp(time)
     for entry in d.entries:
-        logger.warning(entry.link)
         if hasattr(entry, "published_parsed"):
             published_time = datetime(*entry.published_parsed[:6])
         elif hasattr(entry, "updated_parsed"):
             published_time = datetime(*entry.updated_parsed[:6])
         td = last_indexed_publish_time - published_time
         if math.floor(td.total_seconds()) < 0:
-            sleep(SLEEP_TIME)
+            logger.debug(f"new entry detected {entry.link}")
             text = extract_html_text(entry.link)
             if text == "":
                 text = html_tag.sub("", entry.summary)
-            keywords = extract_keyword(text)
             # https://github.com/facebookresearch/fastText/issues/1079
             language = predict_language_for_fasttext(text.replace("\n", ""))[0][0]
             logger.debug(language)
+            if language == "ja":
+                keywords = extract_keyword_japanese(text)
+            else:
+                keywords = extract_keyword_english(text)
             try:
                 image = get_ogp_image(entry.link)
             except urllib.error.HTTPError as e:
@@ -135,18 +139,32 @@ def get_entry(url: str, time: int):
                  "published_time": math.floor(published_time.timestamp()),
                  "image": image,
                  "keywords": keywords})
+            sleep(SLEEP_TIME)
     sorted_result = sorted(result, key=lambda x: x['published_time'])
     if published_time is None or len(sorted_result) == 0:
         return sorted_result, math.floor(last_indexed_publish_time.timestamp())
     return sorted_result, math.floor(sorted_result[-1]["published_time"])
 
 
-def extract_keyword(text):
+def extract_keyword_japanese(text):
     tokenize_text = t.tokenize(text)
     frequency = termextract.janome.cmp_noun_dict(tokenize_text)
     lr = termextract.core.score_lr(
         frequency,
         ignore_words=termextract.janome.IGNORE_WORDS,
+        lr_mode=1, average_rate=1)
+    term_imp = termextract.core.term_importance(frequency, lr)
+    score_sorted_term_imp = sorted(term_imp.items(), key=lambda x: x[1], reverse=True)
+    logger.debug(f"keywords: {score_sorted_term_imp}")
+    return score_sorted_term_imp[:6]
+
+
+def extract_keyword_english(text):
+    tagged_text = nltk.pos_tag(nltk.word_tokenize(text))
+    frequency = termextract.english_postagger.cmp_noun_dict(tagged_text)
+    lr = termextract.core.score_lr(
+        frequency,
+        ignore_words=termextract.english_postagger.IGNORE_WORDS,
         lr_mode=1, average_rate=1)
     term_imp = termextract.core.term_importance(frequency, lr)
     score_sorted_term_imp = sorted(term_imp.items(), key=lambda x: x[1], reverse=True)
