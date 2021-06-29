@@ -1,3 +1,4 @@
+from typing import List, Tuple, Dict
 from janome.tokenizer import Tokenizer
 import nltk
 import termextract.janome
@@ -10,16 +11,17 @@ class KeywordDriverImpl(KeywordDriver):
     def __init__(self):
         self.t = Tokenizer()
 
-    def get_keyword_list(self, text: str, lang: str, num: int = 6):
+    def get_keyword_list(self, text: str, lang: str, num: int = 6) -> List[Tuple[str, float]]:
         if lang == "ja":
             term_imp = self._extract_keyword_japanese(text)
         elif lang == "en":
             term_imp = self._extract_keyword_english(text)
         else:
             term_imp = self._extract_keyword_english(text)
-        return sorted(term_imp.items(), key=lambda x: x[1], reverse=True)
+        # ToDo: invalid type
+        return sorted(term_imp.items(), key=lambda x: x[1], reverse=True)[:num]
 
-    def _extract_keyword_japanese(self, text):
+    def _extract_keyword_japanese(self, text: str) -> Dict[str, int]:
         tokenize_text = self.t.tokenize(text)
         frequency = termextract.janome.cmp_noun_dict(tokenize_text)
         lr = termextract.core.score_lr(
@@ -29,7 +31,7 @@ class KeywordDriverImpl(KeywordDriver):
         return termextract.core.term_importance(frequency, lr)
 
     @staticmethod
-    def _extract_keyword_english(text):
+    def _extract_keyword_english(text: str) -> Dict[str, int]:
         tagged_text = nltk.pos_tag(nltk.word_tokenize(text))
         frequency = termextract.english_postagger.cmp_noun_dict(tagged_text)
         lr = termextract.core.score_lr(
