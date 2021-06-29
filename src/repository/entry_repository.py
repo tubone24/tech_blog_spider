@@ -2,7 +2,7 @@ from typing import List
 
 from src.domain.entry import Entry, Keyword
 from src.interface.repository.entry_repository import EntryRepository
-from src.driver.entry_driver import EntryDriver
+from src.interface.driver.entry_driver import EntryDriver
 
 
 class EntryRepositoryImpl(EntryRepository):

@@ -8,7 +8,7 @@ HARPERDB_PASSWORD = os.getenv("HARPERDB_PASSWORD")
 HARPERDB_SCHEMA = os.getenv("HARPERDB_SCHEMA", "prd")
 
 
-class FeedDriver(FeedDriver):
+class FeedDriverImpl(FeedDriver):
     def __init__(self):
         self.db = harperdb.HarperDB(
             url=HARPERDB_URL,

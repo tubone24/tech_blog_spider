@@ -1,7 +1,7 @@
 from datetime import datetime
 from src.domain.feed import Feed
 from src.interface.repository.feed_repository import FeedRepository
-from src.driver.feed_driver import FeedDriver
+from src.interface.driver.feed_driver import FeedDriver
 
 
 class EntryRepositoryImpl(FeedRepository):
