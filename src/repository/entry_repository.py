@@ -2,18 +2,14 @@ from typing import List
 
 from src.domain.entry import Entry, Keyword
 from src.interface.repository.entry_repository import EntryRepository
+from src.driver.entry_driver import EntryDriver
 
 
 class EntryRepositoryImpl(EntryRepository):
-    def add_entry(self, title: str, url: str, summary: str, image: str, language: str, text: str, published_date: str,
-                  keywords: List[Keyword]) -> Entry:
-        pass
+    entry_driver: EntryDriver
 
     def get_latest_published_entry(self) -> Entry:
         pass
 
-    def get_all_entries(self) -> Entries:
+    def get_all_entries(self) -> List[Entry]:
         pass
-
-    def create(self, name, url, icon=None):
-        return Entries(name, url, icon, [])

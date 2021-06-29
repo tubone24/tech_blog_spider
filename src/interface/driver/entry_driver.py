@@ -1,11 +1,11 @@
 from abc import ABCMeta, abstractmethod
 
 
-class FeedDriver(metaclass=ABCMeta):
+class EntryDriver(metaclass=ABCMeta):
     @abstractmethod
-    def get_all_feeds(self):
+    def get_all_entries(self):
         raise NotImplementedError
 
     @abstractmethod
-    def get_feed_by_name(self, name):
+    def get_latest_published_entry(self, name):
         raise NotImplementedError

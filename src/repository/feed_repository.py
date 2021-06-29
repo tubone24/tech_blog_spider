@@ -16,4 +16,6 @@ class EntryRepositoryImpl(FeedRepository):
         return Feed(name=res["name"], url=res["url"], icon=res["icon"], last_published_datetime=last_published_datetime)
 
     def get_all_feeds(self):
-        pass
+        res = self.feed_driver.get_all_feeds()
+        last_published_datetime = datetime.fromtimestamp(res["time"])
+        return Feed(name=res["name"], url=res["url"], icon=res["icon"], last_published_datetime=last_published_datetime)
