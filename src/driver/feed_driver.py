@@ -1,5 +1,6 @@
 import os
 import harperdb
+from typing import Dict
 from src.interface.driver.feed_driver import FeedDriver
 
 HARPERDB_URL = os.getenv("HARPERDB_URL")
@@ -28,3 +29,7 @@ class FeedDriverImpl(FeedDriver):
                  "time": x["time"]} for x in self.db.sql(f"SELECT * FROM {HARPERDB_SCHEMA}.entry_urls"
                                                          f" LEFT JOIN {HARPERDB_SCHEMA}.last_published "
                                                          f"ON entry_urls.name = last_published.name")]
+
+    def update_last_published(self, name: str, time: int) -> Dict[str, int]:
+        self.db.update(HARPERDB_SCHEMA, "last_published", [{"name": name, "time": time}])
+        return {"name": name, "time": time}
