@@ -1,9 +1,14 @@
 from abc import ABCMeta, abstractmethod
-
+from datetime import datetime
+from typing import List
 from src.domain.feed import Feed
 
 
 class FeedUsecase(metaclass=ABCMeta):
     @abstractmethod
-    async def get_list(self, page: int) -> Articles:
+    def get_all_feed(self) -> List[Feed]:
+        raise NotImplementedError
+
+    @abstractmethod
+    def update_last_published(self, name: str, time: datetime):
         raise NotImplementedError

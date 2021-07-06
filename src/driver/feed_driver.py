@@ -1,7 +1,9 @@
 import os
 import harperdb
-from typing import Dict
+from typing import Dict, List, Union
 from src.interface.driver.feed_driver import FeedDriver
+
+U = Union[str, int]
 
 HARPERDB_URL = os.getenv("HARPERDB_URL")
 HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
@@ -16,13 +18,13 @@ class FeedDriverImpl(FeedDriver):
             username=HARPERDB_USERNAME,
             password=HARPERDB_PASSWORD,)
 
-    def get_feed_by_name(self, name):
+    def get_feed_by_name(self, name) -> Dict[str, U]:
         entry_url = self.db.search_by_hash(HARPERDB_SCHEMA, "entry_urls", [name], get_attributes=["url", "icon"])[0]
         time = self.db.search_by_hash(HARPERDB_SCHEMA, "last_published", [name], get_attributes=["time"])[0]["time"]
         return {"name": entry_url["name"], "url": entry_url["url"],
                 "icon": entry_url["icon"], "time": time}
 
-    def get_all_feeds(self):
+    def get_all_feeds(self) -> List[Dict[str, U]]:
         return [{"name": x["name"],
                  "url": x["url"],
                  "icon": x["icon"],

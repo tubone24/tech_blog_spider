@@ -1,14 +1,16 @@
 from abc import ABCMeta, abstractmethod
-from typing import Dict
+from typing import Dict, List, Union
+
+U = Union[str, int]
 
 
 class FeedDriver(metaclass=ABCMeta):
     @abstractmethod
-    def get_all_feeds(self):
+    def get_all_feeds(self) -> List[Dict[str, U]]:
         raise NotImplementedError
 
     @abstractmethod
-    def get_feed_by_name(self, name):
+    def get_feed_by_name(self, name) -> Dict[str, U]:
         raise NotImplementedError
 
     @abstractmethod
