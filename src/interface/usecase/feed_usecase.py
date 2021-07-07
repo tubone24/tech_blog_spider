@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from datetime import datetime
-from typing import List
+from typing import List, Dict
 from src.domain.feed import Feed
 
 
@@ -10,5 +10,5 @@ class FeedUsecase(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def update_last_published(self, name: str, time: datetime):
+    def update_last_published(self, name: str, time: datetime) -> Dict[str, int]:
         raise NotImplementedError

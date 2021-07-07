@@ -1,0 +1,2 @@
+class EmptyLastPublishedRecordError(BaseException):
+    pass

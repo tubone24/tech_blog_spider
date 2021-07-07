@@ -3,7 +3,7 @@ import math
 from src.domain.feed import Feed
 from src.interface.repository.feed_repository import FeedRepository
 from src.interface.driver.feed_driver import FeedDriver
-from typing import List
+from typing import List, Dict
 
 
 class EntryRepositoryImpl(FeedRepository):
@@ -26,6 +26,6 @@ class EntryRepositoryImpl(FeedRepository):
             result.append(Feed(name=r["name"], url=r["url"], icon=r["icon"], last_published_datetime=last_published_datetime))
         return result
 
-    def update_last_published(self, name: str, time: datetime):
+    def update_last_published(self, name: str, time: datetime) -> Dict[str, int]:
         unixtime = math.floor(time.timestamp())
         return self.feed_driver.update_last_published(name, unixtime)
