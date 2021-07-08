@@ -1,9 +1,7 @@
 from abc import ABCMeta, abstractmethod
-from typing import List, Optional
+from typing import List
 
-from src.domain.entry import Entry, Keyword
-
-U = Optional[str]
+from domain.entry import Entry
 
 
 class EntryRepository(metaclass=ABCMeta):

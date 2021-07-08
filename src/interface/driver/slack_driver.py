@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from src.output.slack_output_data import SlackOutputData
+from output.slack_output_data import SlackOutputData
 
 
 class SlackDriver(metaclass=ABCMeta):

@@ -1,5 +1,5 @@
 from datetime import datetime
-from src.domain.feed import Feed
+from domain.feed import Feed
 from abc import ABCMeta, abstractmethod
 
 

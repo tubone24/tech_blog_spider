@@ -4,7 +4,7 @@ import nltk
 import termextract.janome
 import termextract.core
 import termextract.english_postagger
-from src.interface.driver.keyword_driver import KeywordDriver
+from interface.driver.keyword_driver import KeywordDriver
 
 
 class KeywordDriverImpl(KeywordDriver):

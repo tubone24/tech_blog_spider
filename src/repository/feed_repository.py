@@ -1,12 +1,12 @@
 from datetime import datetime, timedelta
 import math
-from src.domain.feed import Feed
-from src.interface.repository.feed_repository import FeedRepository
-from src.interface.driver.feed_driver import FeedDriver
-from src.interface.driver.favicon_driver import FaviconDriver
-from src.util.error import EmptyLastPublishedRecordError
+from domain.feed import Feed
+from interface.repository.feed_repository import FeedRepository
+from interface.driver.feed_driver import FeedDriver
+from interface.driver.favicon_driver import FaviconDriver
+from util.error import EmptyLastPublishedRecordError
 from typing import List, Dict
-from src.util.logger import Logger
+from util.logger import Logger
 
 
 class EntryRepositoryImpl(FeedRepository):

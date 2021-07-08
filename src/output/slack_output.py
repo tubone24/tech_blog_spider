@@ -1,9 +1,9 @@
 from typing import List
 import math
-from src.domain.entry import Entry
-from src.interface.output.slack_output import SlackOutput
-from src.interface.driver.slack_driver import SlackDriver
-from src.output.slack_output_data import SlackOutputData, SlackAttachment, SlackField
+from domain.entry import Entry
+from interface.output.slack_output import SlackOutput
+from interface.driver.slack_driver import SlackDriver
+from output.slack_output_data import SlackOutputData, SlackAttachment, SlackField
 
 
 FOOTER_TEXT = "TechBlogSpider"

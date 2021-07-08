@@ -1,9 +1,9 @@
 import math
 from datetime import datetime
-from src.domain.feed import Feed
-from src.interface.usecase.entry_usecase import EntryUsecase
-from src.interface.repository.entry_repository import EntryRepository
-from src.interface.output.slack_output import SlackOutput
+from domain.feed import Feed
+from interface.usecase.entry_usecase import EntryUsecase
+from interface.repository.entry_repository import EntryRepository
+from interface.output.slack_output import SlackOutput
 
 
 class EntryUsecaseImpl(EntryUsecase):

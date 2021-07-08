@@ -1,5 +1,5 @@
 import logging
-from src.util.error import DeclarationDuplicateInstanceError
+from util.error import DeclarationDuplicateInstanceError
 
 
 class Logger:

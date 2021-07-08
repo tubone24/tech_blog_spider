@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from src.interface.driver.ogp_image_driver import OgpImageDriver
+from interface.driver.ogp_image_driver import OgpImageDriver
 
 
 class OgpImageDriverImpl(OgpImageDriver):

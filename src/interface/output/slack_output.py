@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from src.domain.entry import Entry
+from domain.entry import Entry
 
 
 class SlackOutput(metaclass=ABCMeta):

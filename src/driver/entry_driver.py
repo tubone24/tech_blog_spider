@@ -1,6 +1,6 @@
 from datetime import datetime
-from src.interface.driver.entry_driver import EntryDriver
-from src.interface.util.http import Http
+from interface.driver.entry_driver import EntryDriver
+from interface.util.http import Http
 import feedparser
 from bs4 import BeautifulSoup
 import re

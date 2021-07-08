@@ -1,7 +1,7 @@
 import os
 import json
 from output.slack_output_data import SlackOutputData
-from src.interface.driver.slack_driver import SlackDriver
+from interface.driver.slack_driver import SlackDriver
 from dataclasses import asdict
 import requests
 

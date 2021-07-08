@@ -1,7 +1,7 @@
 import favicon
 from urllib3.exceptions import HTTPError
 from interface.driver.favicon_driver import FaviconDriver
-from src.util.logger import Logger
+from util.logger import Logger
 
 
 class FaviconDriverImpl(FaviconDriver):

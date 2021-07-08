@@ -1,5 +1,5 @@
 from fasttext import load_model
-from src.interface.driver.predict_lang_driver import PredictLangDriver
+from interface.driver.predict_lang_driver import PredictLangDriver
 
 fasttext_model = load_model("lid.176.bin")
 

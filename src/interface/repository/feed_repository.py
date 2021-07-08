@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from datetime import datetime
 from typing import Dict, List
-from src.domain.feed import Feed
+from domain.feed import Feed
 
 
 class FeedRepository(metaclass=ABCMeta):
