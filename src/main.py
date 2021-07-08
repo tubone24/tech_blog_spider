@@ -29,7 +29,7 @@ SLEEP_TIME = float(os.getenv("SLEEP_TIME", "1"))
 
 
 def main():
-    _logger.info("start tech blog spider")
+    _logger.warning("start tech blog spider")
     GitHubAction(
         feed_usecase=FeedUsecaseImpl(
             feed_repository=FeedRepositoryImpl(
