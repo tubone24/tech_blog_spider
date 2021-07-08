@@ -16,3 +16,7 @@ class FeedDriver(metaclass=ABCMeta):
     @abstractmethod
     def update_last_published(self, name: str, time: int) -> Dict[str, int]:
         raise NotImplementedError
+
+    @abstractmethod
+    def update_feed_icon(self, name: str, icon: str) -> Dict[str, str]:
+        raise NotImplementedError

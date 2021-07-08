@@ -45,6 +45,7 @@ class FeedRepositoryImpl(FeedRepository):
                 last_published_datetime = datetime.now() - timedelta(days=30)
             if r["icon"] is None or r["icon"] == "":
                 icon = self.favicon_driver.get_favicon(r["url"])
+                self.feed_driver.update_feed_icon(name=r["name"], icon=icon)
                 result.append(
                     Feed(
                         name=r["name"],

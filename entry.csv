@@ -5,7 +5,7 @@ name,url,icon
 "heartbeats","https://heartbeats.jp/hbblog/atom.xml","https://i.imgur.com/JLuK99W.png"
 "dsas","http://dsas.blog.klab.org/index.rdf",""
 "voyage","https://techlog.voyagegroup.com/rss",""
-"google","http://feeds.feedburner.com/GoogleJapanDeveloperRelationsBlog?format=xml",""
+"google","https://developers-jp.googleblog.com/atom.xml",""
 "Aiming","https://developer.aiming-inc.com/feed/",""
 "LINE","https://engineering.linecorp.com/ja/feed/",""
 "DeNA","https://engineer.dena.com/index.xml",""
