@@ -12,6 +12,7 @@ class FaviconDriverImpl(FaviconDriver):
         parsed_url = urlparse(url)
         base_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
         try:
+            _logger.info(f"get favicon {base_url}")
             icons = favicon.get(base_url)
         except HTTPError as e:
             _logger.warn(f"Can not get Entry Favicon at {base_url} cause by {e}")
