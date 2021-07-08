@@ -25,7 +25,7 @@ HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
 HARPERDB_PASSWORD = os.getenv("HARPERDB_PASSWORD")
 HARPERDB_SCHEMA = os.getenv("HARPERDB_SCHEMA", "prd")
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
-SLEEP_TIME = float(os.getenv("LOGGING_LEVEL", "1"))
+SLEEP_TIME = float(os.getenv("SLEEP_TIME", "1"))
 
 
 def main():
