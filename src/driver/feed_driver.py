@@ -50,7 +50,5 @@ class FeedDriverImpl(FeedDriver):
         return {"name": name, "time": time}
 
     def update_feed_icon(self, name: str, icon: str) -> Dict[str, str]:
-        self.db.update(
-            self.schema, "entry_urls", [{"name": name, "icon": icon}]
-        )
+        self.db.update(self.schema, "entry_urls", [{"name": name, "icon": icon}])
         return {"name": name, "icon": icon}
