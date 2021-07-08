@@ -32,20 +32,21 @@ class EntryRepositoryImpl(EntryRepository):
         entries = self.entry_driver.get_all_entries(url)
         result = []
         for entry in entries:
-            language = self.predict_lang_driver.predict(text=entry.text, k=1)[0][0]
+            language = self.predict_lang_driver.predict(text=entry["text"], k=1)[0][0]
             keywords = [
                 Keyword(word=x[0], score=x[1])
-                for x in self.keyword_driver.get_keyword_list(entry.text, language)
+                for x in self.keyword_driver.get_keyword_list(entry["text"], language)
             ]
+            image = self.ogp_image_driver.get(entry["html"])
             result.append(
                 Entry(
-                    title=entry.title,
-                    url=entry.url,
-                    summary=entry.summary,
-                    image=entry.image,
+                    title=entry["title"],
+                    url=entry["link"],
+                    summary=entry["summary"],
+                    image=image,
                     language=language,
-                    text=entry.text,
-                    published_date=entry.published_date,
+                    text=entry["text"],
+                    published_date=entry["published_time"],
                     keywords=keywords,
                 )
             )

@@ -8,6 +8,9 @@ import requests
 from time import sleep
 from retrying import retry
 from util.logger import Logger
+from typing import Dict, Union, List
+
+U = Union[str, datetime]
 
 
 class EntryDriverImpl(EntryDriver):
@@ -35,7 +38,7 @@ class EntryDriverImpl(EntryDriver):
                 "text": text,
             }
 
-    def get_all_entries(self, url: str):
+    def get_all_entries(self, url: str) -> List[Dict[str, U]]:
         d = feedparser.parse(url)
         result = []
         for entry in d.entries:
@@ -49,6 +52,7 @@ class EntryDriverImpl(EntryDriver):
                     "summary": self._delete_html_tag(entry.summary),
                     "published_time": published_time,
                     "text": text,
+                    "html": html
                 }
             )
             sleep(self.sleep_time)
