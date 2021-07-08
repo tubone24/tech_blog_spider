@@ -56,8 +56,8 @@ class FeedRepositoryImpl(FeedRepository):
                 result.append(
                     Feed(
                         name=r["name"],
-                        url=icon,
-                        icon=r["icon"],
+                        url=r["url"],
+                        icon=icon,
                         last_published_datetime=last_published_datetime,
                     )
                 )
