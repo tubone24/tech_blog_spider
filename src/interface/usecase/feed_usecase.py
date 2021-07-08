@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from datetime import datetime
 from typing import List, Dict
-from src.domain.feed import Feed
+from domain.feed import Feed
 
 
 class FeedUsecase(metaclass=ABCMeta):
