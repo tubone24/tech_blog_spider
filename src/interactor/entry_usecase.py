@@ -25,4 +25,4 @@ class EntryUsecaseImpl(EntryUsecase):
                     feed_icon=feed.icon,
                     entry=entry,
                 )
-        return entries[-1].published_date
+        return entries[0].published_date
