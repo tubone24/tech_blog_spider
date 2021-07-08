@@ -19,7 +19,7 @@ from util.logger import Logger
 
 
 LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", "INFO")
-_logger = Logger(name="TechBlogSpider", level=LOGGING_LEVEL)
+_logger = Logger(name="TechBlogSpider", level=LOGGING_LEVEL).get_logger()
 HARPERDB_URL = os.getenv("HARPERDB_URL")
 HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
 HARPERDB_PASSWORD = os.getenv("HARPERDB_PASSWORD")
@@ -29,8 +29,7 @@ SLEEP_TIME = float(os.getenv("SLEEP_TIME", "1"))
 
 
 def main():
-    log = _logger.get_logger()
-    log.info("aaaaaa")
+    _logger.info("start tech blog spider")
     GitHubAction(
         feed_usecase=FeedUsecaseImpl(
             feed_repository=FeedRepositoryImpl(
