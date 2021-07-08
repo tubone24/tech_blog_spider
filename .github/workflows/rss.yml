@@ -37,6 +37,9 @@ jobs:
       - name: Activate NLTK
         run:
           python scripts/activate_nltk.py
+      - name: Check black format
+        run:
+          black src --check
       - name: Run RSS
         env:
           HARPERDB_URL: ${{ secrets.HARPERDB_URL }}
