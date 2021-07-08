@@ -52,7 +52,7 @@ class EntryDriverImpl(EntryDriver):
                     "summary": self._delete_html_tag(entry.summary),
                     "published_time": published_time,
                     "text": text,
-                    "html": html
+                    "html": html,
                 }
             )
             sleep(self.sleep_time)
