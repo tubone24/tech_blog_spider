@@ -3,6 +3,7 @@ import logging
 from logging import config
 import yaml
 
+LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", "INFO")
 yaml_path = os.path.join(os.path.dirname(__file__), "logging.yaml")
 
 with open(yaml_path) as f:
@@ -17,6 +18,7 @@ class AppLog:
 
     def __init__(self, name):
         self.logger = logging.getLogger(name)
+        self.logger.setLevel(LOGGING_LEVEL)
 
     def debug(self, msg, *args, **kwargs):
         self.logger.debug(msg, *args, **kwargs)
