@@ -30,7 +30,4 @@ class EntryUsecaseImpl(EntryUsecase):
                 )
         if len(entries) == 0:
             return feed.last_published_datetime
-        _logger.info(
-            f"Update published date: {feed.name}  {feed.last_published_datetime} => {entries[-1].published_date}"
-        )
         return entries[-1].published_date
