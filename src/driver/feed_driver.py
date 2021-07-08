@@ -12,18 +12,28 @@ class FeedDriverImpl(FeedDriver):
         self.schema = schema
 
     def get_feed_by_name(self, name) -> Dict[str, U]:
-        entry_url = self.db.search_by_hash(self.schema, "entry_urls", [name], get_attributes=["url", "icon"])[0]
-        time = self.db.search_by_hash(self.schema, "last_published", [name], get_attributes=["time"])[0]["time"]
-        return {"name": entry_url["name"], "url": entry_url["url"],
-                "icon": entry_url["icon"], "time": time}
+        entry_url = self.db.search_by_hash(
+            self.schema, "entry_urls", [name], get_attributes=["url", "icon"]
+        )[0]
+        time = self.db.search_by_hash(
+            self.schema, "last_published", [name], get_attributes=["time"]
+        )[0]["time"]
+        return {
+            "name": entry_url["name"],
+            "url": entry_url["url"],
+            "icon": entry_url["icon"],
+            "time": time,
+        }
 
     def get_all_feeds(self) -> List[Dict[str, U]]:
-        return [{"name": x["name"],
-                 "url": x["url"],
-                 "icon": x["icon"],
-                 "time": x["time"]} for x in self.db.sql(f"SELECT * FROM {self.schema}.entry_urls"
-                                                         f" LEFT JOIN {self.schema}.last_published "
-                                                         f"ON entry_urls.name = last_published.name")]
+        return [
+            {"name": x["name"], "url": x["url"], "icon": x["icon"], "time": x["time"]}
+            for x in self.db.sql(
+                f"SELECT * FROM {self.schema}.entry_urls"
+                f" LEFT JOIN {self.schema}.last_published "
+                f"ON entry_urls.name = last_published.name"
+            )
+        ]
 
     def update_last_published(self, name: str, time: int) -> Dict[str, int]:
         self.db.update(self.schema, "last_published", [{"name": name, "time": time}])

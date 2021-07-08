@@ -11,7 +11,9 @@ class KeywordDriverImpl(KeywordDriver):
     def __init__(self):
         self.t = Tokenizer()
 
-    def get_keyword_list(self, text: str, lang: str, num: int = 6) -> List[Tuple[str, float]]:
+    def get_keyword_list(
+        self, text: str, lang: str, num: int = 6
+    ) -> List[Tuple[str, float]]:
         if lang == "ja":
             term_imp = self._extract_keyword_japanese(text)
         elif lang == "en":
@@ -27,7 +29,9 @@ class KeywordDriverImpl(KeywordDriver):
         lr = termextract.core.score_lr(
             frequency,
             ignore_words=termextract.janome.IGNORE_WORDS,
-            lr_mode=1, average_rate=1)
+            lr_mode=1,
+            average_rate=1,
+        )
         return termextract.core.term_importance(frequency, lr)
 
     @staticmethod
@@ -37,5 +41,7 @@ class KeywordDriverImpl(KeywordDriver):
         lr = termextract.core.score_lr(
             frequency,
             ignore_words=termextract.english_postagger.IGNORE_WORDS,
-            lr_mode=1, average_rate=1)
+            lr_mode=1,
+            average_rate=1,
+        )
         return termextract.core.term_importance(frequency, lr)

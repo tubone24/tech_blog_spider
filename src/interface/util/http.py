@@ -5,7 +5,6 @@ U = Union[str, int]
 
 
 class Http(metaclass=ABCMeta):
-
     @abstractmethod
     def get(self, url: str) -> str:
         raise NotImplementedError

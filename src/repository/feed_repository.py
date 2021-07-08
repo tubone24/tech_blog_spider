@@ -21,7 +21,12 @@ class FeedRepositoryImpl(FeedRepository):
     def get_feed_by_name(self, name: str):
         res = self.feed_driver.get_feed_by_name(name=name)
         last_published_datetime = datetime.fromtimestamp(res["time"])
-        return Feed(name=res["name"], url=res["url"], icon=res["icon"], last_published_datetime=last_published_datetime)
+        return Feed(
+            name=res["name"],
+            url=res["url"],
+            icon=res["icon"],
+            last_published_datetime=last_published_datetime,
+        )
 
     def get_all_feeds(self) -> List[Feed]:
         result = []
@@ -35,10 +40,24 @@ class FeedRepositoryImpl(FeedRepository):
                 Logger.get_logger().info(f"new feed record: {r['name']}")
                 last_published_datetime = datetime.now() - timedelta(days=30)
             if r["icon"] is not None or r["icon"] != "":
-                result.append(Feed(name=r["name"], url=r["url"], icon=r["icon"], last_published_datetime=last_published_datetime))
+                result.append(
+                    Feed(
+                        name=r["name"],
+                        url=r["url"],
+                        icon=r["icon"],
+                        last_published_datetime=last_published_datetime,
+                    )
+                )
             else:
                 icon = self.favicon_driver.get_favicon(r["url"])
-                result.append(Feed(name=r["name"], url=icon, icon=r["icon"], last_published_datetime=last_published_datetime))
+                result.append(
+                    Feed(
+                        name=r["name"],
+                        url=icon,
+                        icon=r["icon"],
+                        last_published_datetime=last_published_datetime,
+                    )
+                )
         return result
 
     def update_last_published(self, name: str, time: datetime) -> Dict[str, int]:

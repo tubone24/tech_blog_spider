@@ -34,7 +34,8 @@ SLEEP_TIME = int(os.getenv("LOGGING_LEVEL", "1"))
 db = harperdb.HarperDB(
     url=HARPERDB_URL,
     username=HARPERDB_USERNAME,
-    password=HARPERDB_PASSWORD,)
+    password=HARPERDB_PASSWORD,
+)
 
 html_tag = re.compile(r"<[^>]*?>")
 
@@ -57,7 +58,9 @@ def predict_language_for_fasttext(text, k=1):
 
 def get_last_published(name: str):
     try:
-        test = db.search_by_hash(HARPERDB_SCHEMA, "last_published", [name], get_attributes=["time"])
+        test = db.search_by_hash(
+            HARPERDB_SCHEMA, "last_published", [name], get_attributes=["time"]
+        )
         return test[0]["time"]
     except IndexError:
         raise EmptyLastPublishedRecordError()
@@ -69,18 +72,23 @@ def insert_last_published(name: str):
 
 
 def update_last_published(name: str, time: int):
-    result = db.update(HARPERDB_SCHEMA, "last_published", [{"name": name, "time": time}])
+    result = db.update(
+        HARPERDB_SCHEMA, "last_published", [{"name": name, "time": time}]
+    )
     return result
 
 
 def get_entry_urls():
-    return [{"name": x["name"],
-             "url": x["url"],
-             "icon": x["icon"]} for x in db.sql(f"select * from {HARPERDB_SCHEMA}.entry_urls")]
+    return [
+        {"name": x["name"], "url": x["url"], "icon": x["icon"]}
+        for x in db.sql(f"select * from {HARPERDB_SCHEMA}.entry_urls")
+    ]
 
 
 def post_slack(name, url, icon, result):
-    fields = [{"title": x[0], "value": x[1], "short": "true"} for x in result["keywords"]]
+    fields = [
+        {"title": x[0], "value": x[1], "short": "true"} for x in result["keywords"]
+    ]
     payload = {
         "username": name,
         "attachments": [
@@ -89,7 +97,7 @@ def post_slack(name, url, icon, result):
                 "author_link": url,
                 "author_icon": icon,
                 "fallback": result["title"],
-                "color":"#EEEEEE",
+                "color": "#EEEEEE",
                 "title": result["title"],
                 "title_link": result["link"],
                 "image_url": result["image"],
@@ -97,9 +105,9 @@ def post_slack(name, url, icon, result):
                 "footer": "TechBlogSpider",
                 "footer_icon": "https://i.imgur.com/6A4px3e.png",
                 "ts": result["published_time"],
-                "fields": fields
+                "fields": fields,
             }
-        ]
+        ],
     }
     requests.post(SLACK_WEBHOOK_URL, data=json.dumps(payload))
 
@@ -135,14 +143,17 @@ def get_entry(url: str, time: int):
                 logger.warning(f"Can not get OGP image: {e}")
                 image = "https://i.imgur.com/mfYPqRr.png"
             result.append(
-                {"link": entry.link,
-                 "title": f"【{language}】{entry.title}",
-                 "summary": html_tag.sub("", entry.summary),
-                 "published_time": math.floor(published_time.timestamp()),
-                 "image": image,
-                 "keywords": keywords})
+                {
+                    "link": entry.link,
+                    "title": f"【{language}】{entry.title}",
+                    "summary": html_tag.sub("", entry.summary),
+                    "published_time": math.floor(published_time.timestamp()),
+                    "image": image,
+                    "keywords": keywords,
+                }
+            )
             sleep(SLEEP_TIME)
-    sorted_result = sorted(result, key=lambda x: x['published_time'])
+    sorted_result = sorted(result, key=lambda x: x["published_time"])
     if published_time is None or len(sorted_result) == 0:
         return sorted_result, math.floor(last_indexed_publish_time.timestamp())
     return sorted_result, math.floor(sorted_result[-1]["published_time"])
@@ -154,7 +165,9 @@ def extract_keyword_japanese(text):
     lr = termextract.core.score_lr(
         frequency,
         ignore_words=termextract.janome.IGNORE_WORDS,
-        lr_mode=1, average_rate=1)
+        lr_mode=1,
+        average_rate=1,
+    )
     term_imp = termextract.core.term_importance(frequency, lr)
     score_sorted_term_imp = sorted(term_imp.items(), key=lambda x: x[1], reverse=True)
     logger.debug(f"keywords: {score_sorted_term_imp}")
@@ -167,7 +180,9 @@ def extract_keyword_english(text):
     lr = termextract.core.score_lr(
         frequency,
         ignore_words=termextract.english_postagger.IGNORE_WORDS,
-        lr_mode=1, average_rate=1)
+        lr_mode=1,
+        average_rate=1,
+    )
     term_imp = termextract.core.term_importance(frequency, lr)
     score_sorted_term_imp = sorted(term_imp.items(), key=lambda x: x[1], reverse=True)
     logger.debug(f"keywords: {score_sorted_term_imp}")
@@ -181,8 +196,8 @@ def extract_html_text(url):
             data=None,
             headers={
                 "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) "
-                              "Chrome/35.0.1916.47 Safari/537.36 "
-            }
+                "Chrome/35.0.1916.47 Safari/537.36 "
+            },
         )
         cj = CookieJar()
         opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))

@@ -13,7 +13,13 @@ class EntryRepositoryImpl(EntryRepository):
     predict_lang_driver: PredictLangDriver
     ogp_image_driver: OgpImageDriver
 
-    def __init__(self, entry_driver: EntryDriver, keyword_driver: KeywordDriver, predict_lang_driver: PredictLangDriver, ogp_image_driver: OgpImageDriver):
+    def __init__(
+        self,
+        entry_driver: EntryDriver,
+        keyword_driver: KeywordDriver,
+        predict_lang_driver: PredictLangDriver,
+        ogp_image_driver: OgpImageDriver,
+    ):
         self.entry_driver = entry_driver
         self.keyword_driver = keyword_driver
         self.predict_lang_driver = predict_lang_driver
@@ -27,6 +33,20 @@ class EntryRepositoryImpl(EntryRepository):
         result = []
         for entry in entries:
             language = self.predict_lang_driver.predict(text=entry.text, k=1)[0][0]
-            keywords = [Keyword(word=x[0], score=x[1]) for x in self.keyword_driver.get_keyword_list(entry.text, language)]
-            result.append(Entry(title=entry.title, url=entry.url, summary=entry.summary, image=entry.image, language=language, text=entry.text, published_date=entry.published_date, keywords=keywords))
+            keywords = [
+                Keyword(word=x[0], score=x[1])
+                for x in self.keyword_driver.get_keyword_list(entry.text, language)
+            ]
+            result.append(
+                Entry(
+                    title=entry.title,
+                    url=entry.url,
+                    summary=entry.summary,
+                    image=entry.image,
+                    language=language,
+                    text=entry.text,
+                    published_date=entry.published_date,
+                    keywords=keywords,
+                )
+            )
         return result

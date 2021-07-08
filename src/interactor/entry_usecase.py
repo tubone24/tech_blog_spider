@@ -19,6 +19,10 @@ class EntryUsecaseImpl(EntryUsecase):
         for entry in entries:
             td = feed.last_published_datetime - entry.published_date
             if math.floor(td.total_seconds()) < 0:
-                self.slack_output.post_slack(feed_name=feed.name, feed_url=feed.url, feed_icon=feed.icon, entry=entry)
+                self.slack_output.post_slack(
+                    feed_name=feed.name,
+                    feed_url=feed.url,
+                    feed_icon=feed.icon,
+                    entry=entry,
+                )
         return entries[-1].published_date
-

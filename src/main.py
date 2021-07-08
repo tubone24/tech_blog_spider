@@ -29,20 +29,32 @@ SLEEP_TIME = float(os.getenv("SLEEP_TIME", "1"))
 
 
 def main():
-    GitHubAction(feed_usecase=FeedUsecaseImpl(
-        feed_repository=FeedRepositoryImpl(
-            feed_driver=FeedDriverImpl(
-                db=HarperDBImpl(url=HARPERDB_URL, username=HARPERDB_USERNAME, password=HARPERDB_PASSWORD).get_instance(), schema=HARPERDB_SCHEMA
-            ), favicon_driver=FaviconDriverImpl()
-        )
-    ), entry_usecase=EntryUsecaseImpl(entry_repository=EntryRepositoryImpl(
-        entry_driver=EntryDriverImpl(http=HttpImpl(), sleep_time=SLEEP_TIME),
-        keyword_driver=KeywordDriverImpl(),
-        predict_lang_driver=PredictLangImpl(),
-        ogp_image_driver=OgpImageDriverImpl()
-    ), slack_output=SlackOutputImpl(
-        slack_driver=SlackDriverImpl(url=SLACK_WEBHOOK_URL)
-    )))
+    GitHubAction(
+        feed_usecase=FeedUsecaseImpl(
+            feed_repository=FeedRepositoryImpl(
+                feed_driver=FeedDriverImpl(
+                    db=HarperDBImpl(
+                        url=HARPERDB_URL,
+                        username=HARPERDB_USERNAME,
+                        password=HARPERDB_PASSWORD,
+                    ).get_instance(),
+                    schema=HARPERDB_SCHEMA,
+                ),
+                favicon_driver=FaviconDriverImpl(),
+            )
+        ),
+        entry_usecase=EntryUsecaseImpl(
+            entry_repository=EntryRepositoryImpl(
+                entry_driver=EntryDriverImpl(http=HttpImpl(), sleep_time=SLEEP_TIME),
+                keyword_driver=KeywordDriverImpl(),
+                predict_lang_driver=PredictLangImpl(),
+                ogp_image_driver=OgpImageDriverImpl(),
+            ),
+            slack_output=SlackOutputImpl(
+                slack_driver=SlackDriverImpl(url=SLACK_WEBHOOK_URL)
+            ),
+        ),
+    )
 
 
 if __name__ == "__main__":

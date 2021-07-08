@@ -26,11 +26,13 @@ class EntryDriverImpl(EntryDriver):
             published_time = self._get_published_time(entry)
             html = self.http.get(entry.link)
             text = self._extract_html_p_text(html)
-            return {"link": entry.link,
-                    "title": entry.title,
-                    "summary": self._delete_html_tag(entry.summary),
-                    "published_time": published_time,
-                    "text": text}
+            return {
+                "link": entry.link,
+                "title": entry.title,
+                "summary": self._delete_html_tag(entry.summary),
+                "published_time": published_time,
+                "text": text,
+            }
 
     def get_all_entries(self, url: str):
         d = feedparser.parse(url)
@@ -39,11 +41,15 @@ class EntryDriverImpl(EntryDriver):
             published_time = self._get_published_time(entry)
             html = self._get_html(entry.link)
             text = self._extract_html_p_text(html)
-            result.append({"link": entry.link,
-                           "title": entry.title,
-                           "summary": self._delete_html_tag(entry.summary),
-                           "published_time": published_time,
-                           "text": text})
+            result.append(
+                {
+                    "link": entry.link,
+                    "title": entry.title,
+                    "summary": self._delete_html_tag(entry.summary),
+                    "published_time": published_time,
+                    "text": text,
+                }
+            )
             sleep(self.sleep_time)
         return result
 
