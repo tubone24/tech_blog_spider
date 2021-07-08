@@ -25,4 +25,6 @@ class EntryUsecaseImpl(EntryUsecase):
                     feed_icon=feed.icon,
                     entry=entry,
                 )
-        return entries[0].published_date
+        if len(entries) == 0:
+            return feed.last_published_datetime
+        return entries[-1].published_date

@@ -56,7 +56,8 @@ class EntryDriverImpl(EntryDriver):
                 }
             )
             sleep(self.sleep_time)
-        return result
+        sorted_result = sorted(result, key=lambda x: x["published_time"].timestamp())
+        return sorted_result
 
     @staticmethod
     def _get_published_time(entry):
