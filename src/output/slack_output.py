@@ -1,4 +1,3 @@
-from injector import singleton
 import math
 from domain.entry import Entry
 from interface.output.slack_output import SlackOutput
