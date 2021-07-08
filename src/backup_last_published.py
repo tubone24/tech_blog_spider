@@ -11,7 +11,8 @@ FILEPATH = "backup_last_published.json"
 db = harperdb.HarperDB(
     url=HARPERDB_URL,
     username=HARPERDB_USERNAME,
-    password=HARPERDB_PASSWORD,)
+    password=HARPERDB_PASSWORD,
+)
 
 last_published = db.sql(f"select * from {HARPERDB_SCHEMA}.last_published")
 
