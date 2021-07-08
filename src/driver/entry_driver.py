@@ -30,7 +30,7 @@ class EntryDriverImpl(EntryDriver):
         result = []
         for entry in d.entries:
             published_time = self._get_published_time(entry)
-            if published_time < time:
+            if published_time <= time:
                 continue
             html = self._get_html(entry.link)
             text = self._extract_html_p_text(html)
