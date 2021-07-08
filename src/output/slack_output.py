@@ -1,4 +1,4 @@
-from typing import List
+from injector import singleton
 import math
 from domain.entry import Entry
 from interface.output.slack_output import SlackOutput
@@ -13,8 +13,8 @@ FOOTER_ICON = "https://i.imgur.com/6A4px3e.png"
 class SlackOutputImpl(SlackOutput):
     slack_driver: SlackDriver
 
-    def __init__(self):
-        self.slack_driver = SlackDriver()
+    def __init__(self, slack_driver: SlackDriver):
+        self.slack_driver = slack_driver
 
     def post_slack(self, feed_name: str, feed_url: str, feed_icon: str, entry: Entry):
         entry_ts = math.floor(entry.published_date.timestamp())

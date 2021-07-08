@@ -1,4 +1,3 @@
-import os
 import json
 from output.slack_output_data import SlackOutputData
 from interface.driver.slack_driver import SlackDriver
@@ -6,10 +5,10 @@ from dataclasses import asdict
 import requests
 
 
-SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
-
-
 class SlackDriverImpl(SlackDriver):
+    def __init__(self, url: str):
+        self.url = url
+
     def post(self, slack_output: SlackOutputData):
         payload = asdict(slack_output)
-        requests.post(SLACK_WEBHOOK_URL, data=json.dumps(payload))
+        requests.post(self.url, data=json.dumps(payload))

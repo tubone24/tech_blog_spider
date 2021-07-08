@@ -9,13 +9,14 @@ from typing import List, Dict
 from util.logger import Logger
 
 
-class EntryRepositoryImpl(FeedRepository):
+class FeedRepositoryImpl(FeedRepository):
 
     feed_driver: FeedDriver
     favicon_driver: FaviconDriver
 
-    def __init__(self, feed_driver: FeedDriver):
+    def __init__(self, feed_driver: FeedDriver, favicon_driver: FaviconDriver):
         self.feed_driver = feed_driver
+        self.favicon_driver = favicon_driver
 
     def get_feed_by_name(self, name: str):
         res = self.feed_driver.get_feed_by_name(name=name)

@@ -5,14 +5,17 @@ import feedparser
 from bs4 import BeautifulSoup
 import re
 import requests
+from time import sleep
 from retrying import retry
 
 
 class EntryDriverImpl(EntryDriver):
     http: Http
+    sleep_time: float
 
-    def __init__(self):
-        self.http = Http()
+    def __init__(self, http: Http, sleep_time: float = 1):
+        self.http = http
+        self.sleep_time = sleep_time
         self.html_tag = re.compile(r"<[^>]*?>")
 
     # ToDo: Check RSS specification
@@ -41,6 +44,7 @@ class EntryDriverImpl(EntryDriver):
                            "summary": self._delete_html_tag(entry.summary),
                            "published_time": published_time,
                            "text": text})
+            sleep(self.sleep_time)
         return result
 
     @staticmethod

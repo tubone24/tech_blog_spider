@@ -1,5 +1,4 @@
 from typing import List
-
 from domain.entry import Entry, Keyword
 from interface.repository.entry_repository import EntryRepository
 from interface.driver.entry_driver import EntryDriver
@@ -14,11 +13,11 @@ class EntryRepositoryImpl(EntryRepository):
     predict_lang_driver: PredictLangDriver
     ogp_image_driver: OgpImageDriver
 
-    def __init__(self):
-        self.entry_driver = EntryDriver()
-        self.keyword_driver = KeywordDriver()
-        self.predict_lang_driver = PredictLangDriver()
-        self.ogp_image_driver = OgpImageDriver()
+    def __init__(self, entry_driver: EntryDriver, keyword_driver: KeywordDriver, predict_lang_driver: PredictLangDriver, ogp_image_driver: OgpImageDriver):
+        self.entry_driver = entry_driver
+        self.keyword_driver = keyword_driver
+        self.predict_lang_driver = predict_lang_driver
+        self.ogp_image_driver = ogp_image_driver
 
     def get_latest_published_entry(self, url: str) -> Entry:
         pass

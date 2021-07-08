@@ -1,9 +1,11 @@
 import favicon
+from injector import singleton
 from urllib3.exceptions import HTTPError
 from interface.driver.favicon_driver import FaviconDriver
 from util.logger import Logger
 
 
+@singleton
 class FaviconDriverImpl(FaviconDriver):
     def get_favicon(self, url: str) -> str:
         try:

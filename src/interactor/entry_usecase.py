@@ -10,9 +10,9 @@ class EntryUsecaseImpl(EntryUsecase):
     entry_repository: EntryRepository
     slack_output: SlackOutput
 
-    def __init__(self):
-        self.entry_repository = EntryRepository()
-        self.slack_output = SlackOutput()
+    def __init__(self, entry_repository: EntryRepository, slack_output: SlackOutput):
+        self.entry_repository = entry_repository
+        self.slack_output = slack_output
 
     def post_unread_entries(self, feed: Feed) -> datetime:
         entries = self.entry_repository.get_all_entries(feed.url)

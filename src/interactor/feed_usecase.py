@@ -8,8 +8,8 @@ from interface.usecase.feed_usecase import FeedUsecase
 class FeedUsecaseImpl(FeedUsecase):
     feed_repository: FeedRepository
 
-    def __init__(self):
-        self.feed_repository = FeedRepository()
+    def __init__(self, feed_repository: FeedRepository):
+        self.feed_repository = feed_repository
 
     def update_last_published(self, feed: Feed, time: datetime) -> Dict[str, int]:
         return self.feed_repository.update_last_published(feed.name, time)
