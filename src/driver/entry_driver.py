@@ -7,10 +7,11 @@ import re
 import requests
 from time import sleep
 from retrying import retry
-from util.logger import Logger
+from util.logger import AppLog
 from typing import Dict, Union, List
 
 U = Union[str, datetime]
+_logger = AppLog(__name__)
 
 
 class EntryDriverImpl(EntryDriver):
@@ -82,7 +83,7 @@ class EntryDriverImpl(EntryDriver):
         except requests.exceptions.RequestException as e:
             if 400 <= e.response.status_code < 500:
                 # if 4xx Error, can not get html with requests because of forbidden for crawler.
-                Logger.get_logger().warning(e)
+                _logger.warn(e)
                 return ""
             else:
                 raise e

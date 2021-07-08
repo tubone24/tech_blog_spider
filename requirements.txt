@@ -8,3 +8,4 @@ Janome==0.4.1
 beautifulsoup4==4.9.3
 nltk==3.6.2
 black==21.6b0
+PyYAML==5.4.1

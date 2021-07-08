@@ -6,7 +6,10 @@ from interface.driver.feed_driver import FeedDriver
 from interface.driver.favicon_driver import FaviconDriver
 from util.error import EmptyLastPublishedRecordError
 from typing import List, Dict
-from util.logger import Logger
+from util.logger import AppLog
+
+
+_logger = AppLog(__name__)
 
 
 class FeedRepositoryImpl(FeedRepository):
@@ -37,7 +40,7 @@ class FeedRepositoryImpl(FeedRepository):
                     raise EmptyLastPublishedRecordError()
                 last_published_datetime = datetime.fromtimestamp(r["time"])
             except EmptyLastPublishedRecordError:
-                Logger.get_logger().info(f"new feed record: {r['name']}")
+                _logger.info(f"new feed record: {r['name']}")
                 last_published_datetime = datetime.now() - timedelta(days=30)
             if r["icon"] is not None or r["icon"] != "":
                 result.append(

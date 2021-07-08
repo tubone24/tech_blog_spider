@@ -1,7 +1,9 @@
 import favicon
 from urllib3.exceptions import HTTPError
 from interface.driver.favicon_driver import FaviconDriver
-from util.logger import Logger
+from util.logger import AppLog
+
+_logger = AppLog(__name__)
 
 
 class FaviconDriverImpl(FaviconDriver):
@@ -9,7 +11,7 @@ class FaviconDriverImpl(FaviconDriver):
         try:
             icons = favicon.get(url)
         except HTTPError as e:
-            Logger.get_logger().warning(
+            _logger.warn(
                 f"Can not get Entry Favicon at {url} cause by {e}"
             )
             icons = []

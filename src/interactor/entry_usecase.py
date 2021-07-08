@@ -4,7 +4,9 @@ from domain.feed import Feed
 from interface.usecase.entry_usecase import EntryUsecase
 from interface.repository.entry_repository import EntryRepository
 from interface.output.slack_output import SlackOutput
-from util.logger import Logger
+from util.logger import AppLog
+
+_logger = AppLog(__name__)
 
 
 class EntryUsecaseImpl(EntryUsecase):
@@ -28,7 +30,7 @@ class EntryUsecaseImpl(EntryUsecase):
                 )
         if len(entries) == 0:
             return feed.last_published_datetime
-        Logger.get_logger().info(
+        _logger.info(
             f"Update published date: {feed.name}  {feed.last_published_datetime} => {entries[-1].published_date}"
         )
         return entries[-1].published_date

@@ -15,11 +15,11 @@ from driver.slack_driver import SlackDriverImpl
 from output.slack_output import SlackOutputImpl
 from util.http import HttpImpl
 from util.harperdb import HarperDBImpl
-from util.logger import Logger
+from util.logger import AppLog
 
 
 LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", "INFO")
-_logger = Logger(name="TechBlogSpider", level=LOGGING_LEVEL).get_logger()
+_logger = AppLog(__name__)
 HARPERDB_URL = os.getenv("HARPERDB_URL")
 HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
 HARPERDB_PASSWORD = os.getenv("HARPERDB_PASSWORD")
@@ -29,7 +29,7 @@ SLEEP_TIME = float(os.getenv("SLEEP_TIME", "1"))
 
 
 def main():
-    _logger.warning("start tech blog spider")
+    _logger.info("start tech blog spider")
     github_action = GitHubAction(
         feed_usecase=FeedUsecaseImpl(
             feed_repository=FeedRepositoryImpl(

@@ -1,0 +1,18 @@
+version: 1
+formatters:
+  defalutlog:
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: defalutlog
+    stream: ext://sys.stdout
+loggers:
+  filename_to_serialnumber:
+    level: DEBUG
+    handlers: [console]
+    propagate: no
+root:
+  level: DEBUG
+  handlers: [console]

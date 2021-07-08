@@ -1,11 +1,13 @@
 from typing import List, Tuple, Dict
-from util.logger import Logger
+from util.logger import AppLog
 from janome.tokenizer import Tokenizer
 import nltk
 import termextract.janome
 import termextract.core
 import termextract.english_postagger
 from interface.driver.keyword_driver import KeywordDriver
+
+_logger = AppLog(__name__)
 
 
 class KeywordDriverImpl(KeywordDriver):
@@ -26,7 +28,7 @@ class KeywordDriverImpl(KeywordDriver):
         except OverflowError as e:
             # https://github.com/tubone24/tech_blog_spider/runs/3017554640?check_suite_focus=true
             # OverflowError: int too large to convert to float
-            Logger.get_logger().error(f"{e}")
+            _logger.error(f"{e}")
             return []
         # ToDo: Invalid type
         return sorted(term_imp.items(), key=lambda x: x[1], reverse=True)[:num]
