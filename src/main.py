@@ -1,6 +1,6 @@
-from src.interface.usecase.feed_usecase import FeedUsecase
-from src.interface.usecase.entry_usecase import EntryUsecase
-from src.util.logger import Logger
+from interface.usecase.feed_usecase import FeedUsecase
+from interface.usecase.entry_usecase import EntryUsecase
+from util.logger import Logger
 
 
 import os
