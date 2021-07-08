@@ -1,3 +1,5 @@
+import os
+
 from controller.github_action import GitHubAction
 from interactor.feed_usecase import FeedUsecaseImpl
 from interactor.entry_usecase import EntryUsecaseImpl
@@ -16,8 +18,6 @@ from util.harperdb import HarperDBImpl
 from util.logger import Logger
 
 
-import os
-
 LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", "INFO")
 _logger = Logger.get_logger(name="TechBlogSpider", level=LOGGING_LEVEL)
 HARPERDB_URL = os.getenv("HARPERDB_URL")
@@ -29,6 +29,7 @@ SLEEP_TIME = float(os.getenv("SLEEP_TIME", "1"))
 
 
 def main():
+    _logger.info("Start TechBlogSpider")
     GitHubAction(
         feed_usecase=FeedUsecaseImpl(
             feed_repository=FeedRepositoryImpl(
