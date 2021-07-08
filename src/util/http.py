@@ -9,9 +9,11 @@ class HttpImpl(Http):
     def post(self, url: str, body) -> str:
         headers = {"User-Agent": UA}
         res = requests.post(url, data=body, headers=headers)
+        res.raise_for_status()
         return res.text
 
     def get(self, url: str) -> str:
         headers = {"User-Agent": UA}
         res = requests.get(url, headers=headers)
+        res.raise_for_status()
         return res.text

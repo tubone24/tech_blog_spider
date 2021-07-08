@@ -10,5 +10,5 @@ class FeedUsecase(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def update_last_published(self, name: str, time: datetime) -> Dict[str, int]:
+    def update_last_published(self, feed: Feed, time: datetime) -> Dict[str, int]:
         raise NotImplementedError

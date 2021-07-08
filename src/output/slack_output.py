@@ -24,7 +24,7 @@ class SlackOutputImpl(SlackOutput):
                                       author_icon=feed_icon,
                                       fallback=entry.title,
                                       color="#EEEEEE",
-                                      title=entry.title,
+                                      title=f"【{entry.language}】{entry.title}",
                                       title_link=entry.url,
                                       image_url=entry.image,
                                       text=entry.summary,

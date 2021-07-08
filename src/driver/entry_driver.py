@@ -4,6 +4,8 @@ from src.interface.util.http import Http
 import feedparser
 from bs4 import BeautifulSoup
 import re
+import requests
+from retrying import retry
 
 
 class EntryDriverImpl(EntryDriver):
@@ -32,7 +34,7 @@ class EntryDriverImpl(EntryDriver):
         result = []
         for entry in d.entries:
             published_time = self._get_published_time(entry)
-            html = self.http.get(entry.link)
+            html = self._get_html(entry.link)
             text = self._extract_html_p_text(html)
             result.append({"link": entry.link,
                            "title": entry.title,
@@ -56,3 +58,14 @@ class EntryDriverImpl(EntryDriver):
 
     def _delete_html_tag(self, text: str) -> str:
         return self.html_tag.sub("", text)
+
+    @retry(wait_exponential_multiplier=1000, wait_exponential_max=4000)
+    def _get_html(self, link: str):
+        try:
+            return self.http.get(link)
+        except requests.exceptions.RequestException as e:
+            if 400 <= e.response.status_code < 500:
+                # if 4xx Error, can not get html with requests because of forbidden for crawler.
+                return ""
+            else:
+                raise e
