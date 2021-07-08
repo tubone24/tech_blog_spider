@@ -1,4 +1,3 @@
-import math
 from datetime import datetime
 from domain.feed import Feed
 from interface.usecase.entry_usecase import EntryUsecase
