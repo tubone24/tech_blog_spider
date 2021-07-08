@@ -43,22 +43,22 @@ class FeedRepositoryImpl(FeedRepository):
             except EmptyLastPublishedRecordError:
                 _logger.info(f"new feed record: {r['name']}")
                 last_published_datetime = datetime.now() - timedelta(days=30)
-            if r["icon"] is not None:
-                result.append(
-                    Feed(
-                        name=r["name"],
-                        url=r["url"],
-                        icon=r["icon"],
-                        last_published_datetime=last_published_datetime,
-                    )
-                )
-            else:
+            if r["icon"] is None or r["icon"] == "":
                 icon = self.favicon_driver.get_favicon(r["url"])
                 result.append(
                     Feed(
                         name=r["name"],
                         url=r["url"],
                         icon=icon,
+                        last_published_datetime=last_published_datetime,
+                    )
+                )
+            else:
+                result.append(
+                    Feed(
+                        name=r["name"],
+                        url=r["url"],
+                        icon=r["icon"],
                         last_published_datetime=last_published_datetime,
                     )
                 )
