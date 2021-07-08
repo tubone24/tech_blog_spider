@@ -13,3 +13,9 @@ class EntryDriver(metaclass=ABCMeta):
     @abstractmethod
     def get_latest_published_entry(self, url: str):
         raise NotImplementedError
+
+    @abstractmethod
+    def get_until_last_published_entries(
+        self, url: str, time: datetime
+    ) -> List[Dict[str, U]]:
+        raise NotImplementedError

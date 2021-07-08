@@ -23,6 +23,31 @@ class EntryDriverImpl(EntryDriver):
         self.sleep_time = sleep_time
         self.html_tag = re.compile(r"<[^>]*?>")
 
+    def get_until_last_published_entries(
+        self, url: str, time: datetime
+    ) -> List[Dict[str, U]]:
+        d = feedparser.parse(url)
+        result = []
+        for entry in d.entries:
+            published_time = self._get_published_time(entry)
+            if published_time < time:
+                continue
+            html = self._get_html(entry.link)
+            text = self._extract_html_p_text(html)
+            result.append(
+                {
+                    "link": entry.link,
+                    "title": entry.title,
+                    "summary": self._delete_html_tag(entry.summary),
+                    "published_time": published_time,
+                    "text": text,
+                    "html": html,
+                }
+            )
+            sleep(self.sleep_time)
+        sorted_result = sorted(result, key=lambda x: x["published_time"].timestamp())
+        return sorted_result
+
     # ToDo: Check RSS specification
     def get_latest_published_entry(self, url: str):
         d = feedparser.parse(url)

@@ -18,16 +18,16 @@ class EntryUsecaseImpl(EntryUsecase):
         self.slack_output = slack_output
 
     def post_unread_entries(self, feed: Feed) -> datetime:
-        entries = self.entry_repository.get_all_entries(feed.url)
+        entries = self.entry_repository.get_until_last_published_entries(
+            feed.url, feed.last_published_datetime
+        )
         for entry in entries:
-            td = feed.last_published_datetime - entry.published_date
-            if math.floor(td.total_seconds()) < 0:
-                self.slack_output.post_slack(
-                    feed_name=feed.name,
-                    feed_url=feed.url,
-                    feed_icon=feed.icon,
-                    entry=entry,
-                )
+            self.slack_output.post_slack(
+                feed_name=feed.name,
+                feed_url=feed.url,
+                feed_icon=feed.icon,
+                entry=entry,
+            )
         if len(entries) == 0:
             return feed.last_published_datetime
         return entries[-1].published_date
