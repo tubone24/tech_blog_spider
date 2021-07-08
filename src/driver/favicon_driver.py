@@ -11,9 +11,7 @@ class FaviconDriverImpl(FaviconDriver):
         try:
             icons = favicon.get(url)
         except HTTPError as e:
-            _logger.warn(
-                f"Can not get Entry Favicon at {url} cause by {e}"
-            )
+            _logger.warn(f"Can not get Entry Favicon at {url} cause by {e}")
             icons = []
         if len(icons) == 0:
             return ""
