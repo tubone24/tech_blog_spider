@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import List, Dict
-from src.interface.repository.feed_repository import FeedRepository
+from interface.repository.feed_repository import FeedRepository
 from domain.feed import Feed
-from src.interface.usecase.feed_usecase import FeedUsecase
+from interface.usecase.feed_usecase import FeedUsecase
 
 
 class FeedUsecaseImpl(FeedUsecase):
