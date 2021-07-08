@@ -35,6 +35,7 @@ class FeedRepositoryImpl(FeedRepository):
         result = []
         res = self.feed_driver.get_all_feeds()
         for r in res:
+            _logger.info(r)
             try:
                 if r["time"] is None or r["time"] == "":
                     raise EmptyLastPublishedRecordError()
