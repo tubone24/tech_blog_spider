@@ -18,6 +18,7 @@ class FaviconDriverImpl(FaviconDriver):
             _logger.warn(f"Can not get Entry Favicon at {base_url} cause by {e}")
             icons = []
         if len(icons) == 0:
+            _logger.warn(f"no favicon {base_url}")
             return ""
         else:
             return icons[0].url
