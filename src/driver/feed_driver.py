@@ -37,11 +37,14 @@ class FeedDriverImpl(FeedDriver):
 
     def update_last_published(self, name: str, time: int) -> Dict[str, int]:
         data = self.db.search_by_hash(
-            self.schema, "last_published", [name], get_attributes=["time"])
+            self.schema, "last_published", [name], get_attributes=["time"]
+        )
         if len(data) == 0:
             self.db.insert(
                 self.schema, "last_published", [{"name": name, "time": time}]
             )
         else:
-            self.db.update(self.schema, "last_published", [{"name": name, "time": time}])
+            self.db.update(
+                self.schema, "last_published", [{"name": name, "time": time}]
+            )
         return {"name": name, "time": time}
