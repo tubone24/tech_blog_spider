@@ -6,5 +6,5 @@ fasttext_model = load_model("lid.176.bin")
 
 class PredictLangImpl(PredictLangDriver):
     def predict(self, text: str, k: int):
-        label, score = fasttext_model.predict(text, k)
+        label, score = fasttext_model.predict(text.replace("\n", ""), k)
         return list(zip([lang.replace("__label__", "") for lang in label], score))
