@@ -30,7 +30,11 @@ class EntryDriverImpl(EntryDriver):
         d = feedparser.parse(url)
         result = []
         for entry in d.entries:
-            published_time = self._get_published_time(entry)
+            try:
+                published_time = self._get_published_time(entry)
+            except NoPublishDateError:
+                _logger.warn(f"No Published Data: skip {url}")
+                continue
             if published_time <= time:
                 continue
             html = self._get_html(entry.link)
