@@ -8,3 +8,7 @@ class DeclarationDuplicateInstanceError(BaseException):
 
 class NoPublishDateError(BaseException):
     pass
+
+
+class NoEntrySummaryError(BaseException):
+    pass
