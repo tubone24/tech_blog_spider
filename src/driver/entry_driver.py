@@ -66,7 +66,11 @@ class EntryDriverImpl(EntryDriver):
             }
 
     def get_all_entries(self, url: str) -> List[Dict[str, U]]:
-        d = feedparser.parse(url)
+        try:
+            d = feedparser.parse(url)
+        except KeyError as e:
+            _logger.error(e)
+            return []
         result = []
         for entry in d.entries:
             try:
