@@ -1,6 +1,7 @@
 from datetime import datetime
 from interface.driver.entry_driver import EntryDriver
 from interface.util.http import Http
+from util.error import NoPublishDateError
 import feedparser
 from bs4 import BeautifulSoup
 import re
@@ -68,7 +69,11 @@ class EntryDriverImpl(EntryDriver):
         d = feedparser.parse(url)
         result = []
         for entry in d.entries:
-            published_time = self._get_published_time(entry)
+            try:
+                published_time = self._get_published_time(entry)
+            except NoPublishDateError:
+                _logger.warn(f"No Published Data: skip {url}")
+                continue
             html = self._get_html(entry.link)
             text = self._extract_html_p_text(html)
             result.append(
@@ -87,10 +92,14 @@ class EntryDriverImpl(EntryDriver):
 
     @staticmethod
     def _get_published_time(entry):
-        if hasattr(entry, "published_parsed"):
-            return datetime(*entry.published_parsed[:6])
-        elif hasattr(entry, "updated_parsed"):
-            return datetime(*entry.updated_parsed[:6])
+        try:
+            if hasattr(entry, "published_parsed"):
+                return datetime(*entry.published_parsed[:6])
+            elif hasattr(entry, "updated_parsed"):
+                return datetime(*entry.updated_parsed[:6])
+        except TypeError as e:
+            _logger.debug(e)
+            raise NoPublishDateError()
 
     @staticmethod
     def _extract_html_p_text(html: str) -> str:

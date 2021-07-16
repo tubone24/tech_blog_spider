@@ -4,3 +4,7 @@ class EmptyLastPublishedRecordError(BaseException):
 
 class DeclarationDuplicateInstanceError(BaseException):
     pass
+
+
+class NoPublishDateError(BaseException):
+    pass
