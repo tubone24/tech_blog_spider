@@ -35,11 +35,16 @@ class EntryDriverImpl(EntryDriver):
                 continue
             html = self._get_html(entry.link)
             text = self._extract_html_p_text(html)
+            try:
+                summary = self._delete_html_tag(entry.summary)
+            except AttributeError:
+                _logger.warn(f"NoEntrySummaryError {entry.link}")
+                summary = text[:200]
             result.append(
                 {
                     "link": entry.link,
                     "title": entry.title,
-                    "summary": self._delete_html_tag(entry.summary),
+                    "summary": summary,
                     "published_time": published_time,
                     "text": text,
                     "html": html,
