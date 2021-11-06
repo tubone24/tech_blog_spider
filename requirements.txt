@@ -1,5 +1,5 @@
 harperdb==0.4.2
-feedparser==6.0.6
+feedparser==6.0.8
 requests==2.25.1
 opengraph-py3==0.71
 favicon==0.7.0
