@@ -32,7 +32,8 @@ jobs:
         run:
           sh scripts/install_pytermextract.sh
       - name: Install fastText
-        run:
+        run: |
+          pip install pybind11
           sh scripts/install_fasttext.sh
       - name: Activate NLTK
         run:
