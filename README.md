@@ -53,6 +53,55 @@ It doesn't have any particular meaning, but I imagined a spider running around o
 - Create 2 tables
   - entry_urls (hash attr is `name`)
   - last_published (hash attr is `name`)
+ 
+#### (optional) Set schema and tables on REST API
+
+create database(schema)
+
+```
+POST /
+{
+    "operation": "create_database",
+    "database": "prd"
+}
+```
+
+create `entry_urls` table
+
+```
+POST /
+{
+    "operation": "create_table",
+    "database": "prd",
+    "table": "entry_urls",
+    "primary_key": "name"
+}
+```
+
+
+create `last_published` table
+
+```
+POST /
+{
+    "operation": "create_table",
+    "database": "prd",
+    "table": "last_published",
+    "primary_key": "name"
+}
+```
+
+create attribute
+
+```
+POST /
+{
+    "operation": "create_attribute",
+    "database": "prd",
+    "table": "last_published",
+    "attribute": "time"
+}
+```
 
 ### Set entries
 
