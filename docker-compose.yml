@@ -1,0 +1,14 @@
+version: '3'
+services:
+  harperdb:
+    image: harperdb/harperdb
+    ports:
+      - "9925:9925"
+      - "9926:9926"
+    environment:
+      - HDB_ADMIN_USERNAME=SET_USERNAME
+      - HDB_ADMIN_PASSWORD=SET_PASSWORD
+      - LOGGING_STDSTREAMS=true
+    volumes:
+      - "${PWD}/.hdb:/home/harperdb/hdb"
+    restart: always
