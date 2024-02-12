@@ -115,8 +115,13 @@ class EntryDriverImpl(EntryDriver):
                 return datetime(*entry.published_parsed[:6])
             elif hasattr(entry, "updated_parsed"):
                 return datetime(*entry.updated_parsed[:6])
+            else:
+                _logger.warn(f"No Published Data: skip {entry.link}")
+                raise NoPublishDateError()
         except TypeError as e:
             _logger.debug(e)
+            raise NoPublishDateError()
+        except NoPublishDateError as e:
             raise NoPublishDateError()
 
     @staticmethod
