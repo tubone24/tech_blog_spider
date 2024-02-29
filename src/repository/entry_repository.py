@@ -34,6 +34,8 @@ class EntryRepositoryImpl(EntryRepository):
         result = []
         for entry in entries:
             language = self.predict_lang_driver.predict(text=entry["text"], k=1)[0][0]
+            if language != "ja" or language != "en":
+                continue
             keywords = [
                 Keyword(word=x[0], score=x[1])
                 for x in self.keyword_driver.get_keyword_list(entry["text"], language)
