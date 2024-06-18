@@ -35,6 +35,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.github_token }}
         run: |
           git config --local user.name GitHubActions
+          git config --local user.email "example@example.com"
           git remote set-url origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
       - name: Git push, tag, upload assets
         run: |
