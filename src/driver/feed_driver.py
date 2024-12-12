@@ -13,13 +13,14 @@ class FeedDriverImpl(FeedDriver):
             connection_string,
             tls=True,
             authSource="admin",
-            serverSelectionTimeoutMS=5000,  # タイムアウトを5秒に設定
-            heartbeatFrequencyMS=10000,  # ハートビート頻度を10秒に設定
-            connectTimeoutMS=200000,  # 接続タイムアウトを20秒に設定
-            socketTimeoutMS=200000,  # ソケットタイムアウトを20秒に設定
-            maxPoolSize=2,  # コネクションプールの最大サイズ
-            minPoolSize=1,  # コネクションプールの最小サイズ
-            maxIdleTimeMS=6000,  # アイドル接続を1分で切断
+            retryWrites=True,
+            serverSelectionTimeoutMS=30000,
+            connectTimeoutMS=30000,
+            socketTimeoutMS=30000,
+            maxPoolSize=1,  # レプリカセットの接続問題を回避するため
+            minPoolSize=1,
+            maxIdleTimeMS=30000,
+            heartbeatFrequencyMS=30000,
         )
         self.db = self.client[database]
         self.entry_urls = self.db.entry_urls
@@ -28,7 +29,7 @@ class FeedDriverImpl(FeedDriver):
 
     def check_connection(self):
         try:
-            self.client.admin.command("ping")
+            self.client.admin.command({"ping": 1, "maxTimeMS": 30000})
         except ServerSelectionTimeoutError:
             print("サーバー選択がタイムアウトしました")
             self.client.close()
