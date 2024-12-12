@@ -7,13 +7,14 @@ MONGODB_CONNECTION_STRING = os.getenv("MONGODB_CONNECTION_STRING")
 DATABASE = os.getenv("MONGODB_DATABASE", "prd")
 FILEPATH = "entry.csv"
 
+
 def load_csv_to_mongodb():
     # MongoDBクライアントの初期化
     client = MongoClient(
         MONGODB_CONNECTION_STRING,
         tls=True,
         retryWrites=True,
-        serverSelectionTimeoutMS=30000
+        serverSelectionTimeoutMS=30000,
     )
 
     db = client[os.environ.get("MONGODB_DATABASE", "prd")]
@@ -28,7 +29,7 @@ def load_csv_to_mongodb():
             "name": row["name"],
             "url": row["url"],
             "icon": None,  # アイコンの初期値
-            "time": 0  # 最終更新時間の初期値
+            "time": 0,  # 最終更新時間の初期値
         }
         documents.append(doc)
 
@@ -38,22 +39,15 @@ def load_csv_to_mongodb():
         for doc in documents:
             entry_urls.update_one(
                 {"name": doc["name"]},
-                {
-                    "$set": {
-                        "url": doc["url"],
-                        "icon": doc["icon"]
-                    }
-                },
-                upsert=True
+                {"$set": {"url": doc["url"], "icon": doc["icon"]}},
+                upsert=True,
             )
 
         # last_publishedコレクションに初期データを挿入
         last_published = db.last_published
         for doc in documents:
             last_published.update_one(
-                {"name": doc["name"]},
-                {"$set": {"time": doc["time"]}},
-                upsert=True
+                {"name": doc["name"]}, {"$set": {"time": doc["time"]}}, upsert=True
             )
 
         print(f"データ投入完了: {len(documents)}件")
@@ -63,6 +57,7 @@ def load_csv_to_mongodb():
         raise
     finally:
         client.close()
+
 
 if __name__ == "__main__":
     load_csv_to_mongodb()
