@@ -23,8 +23,9 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install poetry
+          poetry config virtualenvs.create true
           poetry install
-          poetry shell
+          source $(poetry env info --path)/bin/activate
       - name: Install termextract
         run:
           sh scripts/install_pytermextract.sh
