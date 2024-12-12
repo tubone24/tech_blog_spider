@@ -3,8 +3,6 @@ from typing import Dict, List, Union
 from pymongo import MongoClient
 from interface.driver.feed_driver import FeedDriver
 from pymongo.errors import ServerSelectionTimeoutError
-import certifi
-import ssl
 
 U = Union[str, int]
 
@@ -14,8 +12,6 @@ class FeedDriverImpl(FeedDriver):
         self.client = MongoClient(
             connection_string,
             tls=True,
-            tlsCAFile=certifi.where(),
-            ssl_cert_reqs=ssl.CERT_NONE,
             authSource="admin",
             retryWrites=True,
             serverSelectionTimeoutMS=30000,
