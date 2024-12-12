@@ -2,6 +2,7 @@ import os
 from typing import Dict, List, Union
 from pymongo import MongoClient
 from interface.driver.feed_driver import FeedDriver
+from pymongo.errors import ServerSelectionTimeoutError
 
 U = Union[str, int]
 
@@ -18,10 +19,17 @@ class FeedDriverImpl(FeedDriver):
             heartbeatFrequencyMS=10000,  # ハートビート頻度を10秒に設定
             maxPoolSize=50,  # コネクションプールの最大サイズ
             waitQueueTimeoutMS=5000,  # キューのタイムアウト
+            maxIdleTimeMS=60000,
         )
         self.db = self.client[database]
         self.entry_urls = self.db.entry_urls
         self.last_published = self.db.last_published
+        try:
+            self.client.admin.command('ping')
+        except ServerSelectionTimeoutError:
+            print("サーバー選択がタイムアウトしました")
+            self.client.close()
+            raise ServerSelectionTimeoutError
 
     def get_feed_by_name(self, name) -> Dict[str, U]:
         entry_url = self.entry_urls.find_one(
