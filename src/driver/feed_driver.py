@@ -20,6 +20,7 @@ class FeedDriverImpl(FeedDriver):
             maxPoolSize=2,  # コネクションプールの最大サイズ
             minPoolSize=1,  # コネクションプールの最小サイズ
             maxIdleTimeMS=60000,  # アイドル接続を1分で切断
+            keepAlive=True,
         )
         self.db = self.client[database]
         self.entry_urls = self.db.entry_urls
