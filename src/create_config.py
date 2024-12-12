@@ -1,7 +1,6 @@
 import os
 from pymongo import MongoClient
 import pandas as pd
-import certifi
 
 MONGODB_CONNECTION_STRING = os.getenv("MONGODB_CONNECTION_STRING")
 DATABASE = os.getenv("MONGODB_DATABASE", "prd")
