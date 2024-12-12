@@ -25,7 +25,7 @@ class FeedDriverImpl(FeedDriver):
         self.entry_urls = self.db.entry_urls
         self.last_published = self.db.last_published
         try:
-            self.client.admin.command('ping')
+            self.client.admin.command("ping")
         except ServerSelectionTimeoutError:
             print("サーバー選択がタイムアウトしました")
             self.client.close()
