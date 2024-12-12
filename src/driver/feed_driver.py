@@ -25,6 +25,7 @@ class FeedDriverImpl(FeedDriver):
         self.entry_urls = self.db.entry_urls
         self.last_published = self.db.last_published
         self.check_connection()
+
     def check_connection(self):
         try:
             self.client.admin.command("ping")
