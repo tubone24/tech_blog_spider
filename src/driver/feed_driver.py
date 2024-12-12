@@ -8,7 +8,12 @@ U = Union[str, int]
 
 class FeedDriverImpl(FeedDriver):
     def __init__(self, connection_string: str, database: str = "prd"):
-        self.client = MongoClient(connection_string)
+        self.client = MongoClient(
+            connection_string,
+            tls=True,
+            tlsAllowInvalidCertificates=True,
+            retryWrites=True,
+        )
         self.db = self.client[database]
         self.entry_urls = self.db.entry_urls
         self.last_published = self.db.last_published
