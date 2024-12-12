@@ -23,7 +23,6 @@ jobs:
       - name: Install Dependencies
         run:
           pip install poetry
-          poetry config virtualenvs.create true
           poetry install
           poetry shell
       - name: Install termextract
