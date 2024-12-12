@@ -18,7 +18,6 @@ class KeywordDriverImpl(KeywordDriver):
         self, text: str, lang: str, num: int = 6
     ) -> List[Tuple[str, float]]:
         try:
-
             if lang == "ja":
                 term_imp = self._extract_keyword_japanese(text)
             elif lang == "en":

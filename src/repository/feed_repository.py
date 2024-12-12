@@ -13,7 +13,6 @@ _logger = AppLog(__name__)
 
 
 class FeedRepositoryImpl(FeedRepository):
-
     feed_driver: FeedDriver
     favicon_driver: FaviconDriver
 
