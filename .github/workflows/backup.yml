@@ -1,6 +1,7 @@
 name: Backup Last Published
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 0 1 * *"
 
@@ -28,6 +29,7 @@ jobs:
           HARPERDB_USERNAME: ${{ secrets.HARPERDB_USERNAME }}
           HARPERDB_PASSWORD: ${{ secrets.HARPERDB_PASSWORD }}
           HARPERDB_SCHEMA: ${{ secrets.HARPERDB_SCHEMA }}
+          MONGODB_CONNECTION_STRING: ${{ secrets.MONGODB_CONNECTION_STRING }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python3 src/backup_last_published.py
       - name: Setup git

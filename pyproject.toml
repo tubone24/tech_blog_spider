@@ -20,6 +20,8 @@ black = "22.8.0"
 pyyaml = "6.0"
 pymongo = {extras = ["srv"], version = "^4.10.1"}
 numpy = "<2"
+pybind11 = "^2.13.6"
+fasttext-wheel = "^0.9.2"
 
 
 [build-system]
