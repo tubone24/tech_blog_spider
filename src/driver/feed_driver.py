@@ -15,10 +15,9 @@ class FeedDriverImpl(FeedDriver):
             retryWrites=True,
             authSource="admin",
             serverSelectionTimeoutMS=5000,  # タイムアウトを5秒に設定
-            heartbeatFrequencyMS=10000,     # ハートビート頻度を10秒に設定
-            maxPoolSize=50,                 # コネクションプールの最大サイズ
-            waitQueueTimeoutMS=5000         # キューのタイムアウト
-
+            heartbeatFrequencyMS=10000,  # ハートビート頻度を10秒に設定
+            maxPoolSize=50,  # コネクションプールの最大サイズ
+            waitQueueTimeoutMS=5000,  # キューのタイムアウト
         )
         self.db = self.client[database]
         self.entry_urls = self.db.entry_urls
