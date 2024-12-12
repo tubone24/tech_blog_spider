@@ -19,16 +19,12 @@ jobs:
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
         with:
-          python-version: "3.7"
-      - uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+          python-version: "3.11"
       - name: Install Dependencies
         run:
-          pip install -r requirements.txt
+          pip install poetry
+          poetry install
+          source $(poetry env info --path)/bin/activate
       - name: Install termextract
         run:
           sh scripts/install_pytermextract.sh
