@@ -16,25 +16,53 @@ def load_csv_to_mongodb():
         serverSelectionTimeoutMS=30000
     )
 
-    # データベースとコレクションの取得
-    db = client[DATABASE]
-    collection = db.entry_urls
+    db = client[os.environ.get("MONGODB_DATABASE", "prd")]
 
-    # CSVファイルの読み込み
-    df = pd.read_csv(FILEPATH)
+    # CSVファイルの読み込みと初期データの設定
+    df = pd.read_csv("entry.csv")
 
-    # データをMongoDBのドキュメント形式に変換
-    documents = df.to_dict('records')
+    # 初期値を設定
+    documents = []
+    for _, row in df.iterrows():
+        doc = {
+            "name": row["name"],
+            "url": row["url"],
+            "icon": None,  # アイコンの初期値
+            "time": 0  # 最終更新時間の初期値
+        }
+        documents.append(doc)
 
-    # upsert処理の実行
-    for doc in documents:
-        collection.update_one(
-            {"name": doc["name"]},
-            {"$set": doc},
-            upsert=True
-        )
+    try:
+        # entry_urlsコレクションにデータを挿入
+        entry_urls = db.entry_urls
+        for doc in documents:
+            entry_urls.update_one(
+                {"name": doc["name"]},
+                {
+                    "$set": {
+                        "url": doc["url"],
+                        "icon": doc["icon"]
+                    }
+                },
+                upsert=True
+            )
 
-    client.close()
+        # last_publishedコレクションに初期データを挿入
+        last_published = db.last_published
+        for doc in documents:
+            last_published.update_one(
+                {"name": doc["name"]},
+                {"$set": {"time": doc["time"]}},
+                upsert=True
+            )
+
+        print(f"データ投入完了: {len(documents)}件")
+
+    except Exception as e:
+        print(f"エラーが発生しました: {str(e)}")
+        raise
+    finally:
+        client.close()
 
 if __name__ == "__main__":
     load_csv_to_mongodb()
