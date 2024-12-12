@@ -13,7 +13,6 @@ config.dictConfig(dict_config)
 
 
 class AppLog:
-
     logger = None
 
     def __init__(self, name):

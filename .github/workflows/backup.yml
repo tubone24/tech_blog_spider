@@ -1,6 +1,7 @@
 name: Backup Last Published
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 0 1 * *"
 
@@ -12,24 +13,24 @@ jobs:
       - name: Set up Python 3.x
         uses: actions/setup-python@v2
         with:
-          python-version: "3.7"
-      - uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+          python-version: "3.11"
       - name: Install Dependencies
-        run:
-          pip install -r requirements.txt
+        run: |
+          pip install poetry
+          poetry config virtualenvs.create true
+          poetry install
+          source $(poetry env info --path)/bin/activate
       - name: buckup last published
         env:
           HARPERDB_URL: ${{ secrets.HARPERDB_URL }}
           HARPERDB_USERNAME: ${{ secrets.HARPERDB_USERNAME }}
           HARPERDB_PASSWORD: ${{ secrets.HARPERDB_PASSWORD }}
           HARPERDB_SCHEMA: ${{ secrets.HARPERDB_SCHEMA }}
+          MONGODB_CONNECTION_STRING: ${{ secrets.MONGODB_CONNECTION_STRING }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: python3 src/backup_last_published.py
+        run: |
+          source $(poetry env info --path)/bin/activate
+          python src/backup_last_published.py
       - name: Setup git
         env:
           GITHUB_TOKEN: ${{ secrets.github_token }}
