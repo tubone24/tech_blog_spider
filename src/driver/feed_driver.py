@@ -13,6 +13,7 @@ class FeedDriverImpl(FeedDriver):
             tls=True,
             tlsAllowInvalidCertificates=True,
             retryWrites=True,
+            authSource='admin',
         )
         self.db = self.client[database]
         self.entry_urls = self.db.entry_urls
