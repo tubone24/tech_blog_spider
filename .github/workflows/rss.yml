@@ -27,17 +27,21 @@ jobs:
           poetry install
           source $(poetry env info --path)/bin/activate
       - name: Install termextract
-        run:
+        run: |
+          source $(poetry env info --path)/bin/activate
           sh scripts/install_pytermextract.sh
       - name: Install fastText
         run: |
+          source $(poetry env info --path)/bin/activate
           pip install pybind11
           sh scripts/install_fasttext.sh
       - name: Activate NLTK
-        run:
+        run: |
+          source $(poetry env info --path)/bin/activate
           python scripts/activate_nltk.py
       - name: Check black format
-        run:
+        run: |
+          source $(poetry env info --path)/bin/activate
           black src --check
       - name: Run RSS
         env:
@@ -49,4 +53,6 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           LOGGING_LEVEL: "INFO"
           SLEEP_TIME: "1"
-        run: python3 src/main.py
+        run: |
+          source $(poetry env info --path)/bin/activate
+          python src/main.py
