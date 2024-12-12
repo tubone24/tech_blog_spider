@@ -13,6 +13,13 @@ class FeedDriverImpl(FeedDriver):
             connection_string,
             tls=True,
             authSource="admin",
+            serverSelectionTimeoutMS=5000,  # タイムアウトを5秒に設定
+            heartbeatFrequencyMS=10000,  # ハートビート頻度を10秒に設定
+            connectTimeoutMS=20000,  # 接続タイムアウトを20秒に設定
+            socketTimeoutMS=20000,  # ソケットタイムアウトを20秒に設定
+            maxPoolSize=50,  # コネクションプールの最大サイズ
+            minPoolSize=10,  # コネクションプールの最小サイズ
+            maxIdleTimeMS=60000,  # アイドル接続を1分で切断
         )
         self.db = self.client[database]
         self.entry_urls = self.db.entry_urls
