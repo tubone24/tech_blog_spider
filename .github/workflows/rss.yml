@@ -48,6 +48,7 @@ jobs:
           HARPERDB_USERNAME: ${{ secrets.HARPERDB_USERNAME }}
           HARPERDB_PASSWORD: ${{ secrets.HARPERDB_PASSWORD }}
           HARPERDB_SCHEMA: ${{ secrets.HARPERDB_SCHEMA }}
+          MONGODB_CONNECTION_STRING: ${{ secrets.MONGODB_CONNECTION_STRING }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           LOGGING_LEVEL: "INFO"
           SLEEP_TIME: "1"

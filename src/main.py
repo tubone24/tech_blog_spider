@@ -19,10 +19,6 @@ from util.logger import AppLog
 
 LOGGING_LEVEL = os.getenv("LOGGING_LEVEL", "INFO")
 _logger = AppLog(__name__)
-HARPERDB_URL = os.getenv("HARPERDB_URL")
-HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
-HARPERDB_PASSWORD = os.getenv("HARPERDB_PASSWORD")
-HARPERDB_SCHEMA = os.getenv("HARPERDB_SCHEMA", "prd")
 MONGODB_CONNECTION_STRING = os.getenv("MONGODB_CONNECTION_STRING")
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 SLEEP_TIME = float(os.getenv("SLEEP_TIME", "1"))
