@@ -24,6 +24,8 @@ class FeedDriverImpl(FeedDriver):
         self.db = self.client[database]
         self.entry_urls = self.db.entry_urls
         self.last_published = self.db.last_published
+        self.check_connection()
+    def check_connection(self):
         try:
             self.client.admin.command("ping")
         except ServerSelectionTimeoutError:
@@ -32,6 +34,7 @@ class FeedDriverImpl(FeedDriver):
             raise ServerSelectionTimeoutError
 
     def get_feed_by_name(self, name) -> Dict[str, U]:
+        self.check_connection()
         entry_url = self.entry_urls.find_one(
             {"name": name}, {"_id": 0, "url": 1, "icon": 1}
         )
@@ -44,6 +47,7 @@ class FeedDriverImpl(FeedDriver):
         }
 
     def get_all_feeds(self) -> List[Dict[str, U]]:
+        self.check_connection()
         pipeline = [
             {
                 "$lookup": {
@@ -66,11 +70,13 @@ class FeedDriverImpl(FeedDriver):
         return list(self.entry_urls.aggregate(pipeline))
 
     def update_last_published(self, name: str, time: int) -> Dict[str, int]:
+        self.check_connection()
         self.last_published.update_one(
             {"name": name}, {"$set": {"time": time}}, upsert=True
         )
         return {"name": name, "time": time}
 
     def update_feed_icon(self, name: str, icon: str) -> Dict[str, str]:
+        self.check_connection()
         self.entry_urls.update_one({"name": name}, {"$set": {"icon": icon}})
         return {"name": name, "icon": icon}
