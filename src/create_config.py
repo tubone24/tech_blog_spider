@@ -1,16 +1,40 @@
 import os
-import harperdb
+from pymongo import MongoClient
+import pandas as pd
+import certifi
 
-HARPERDB_URL = os.getenv("HARPERDB_URL")
-HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
-HARPERDB_PASSWORD = os.getenv("HARPERDB_PASSWORD")
-HARPERDB_SCHEMA = os.getenv("HARPERDB_SCHEMA", "prd")
+MONGODB_CONNECTION_STRING = os.getenv("MONGODB_CONNECTION_STRING")
+DATABASE = os.getenv("MONGODB_DATABASE", "prd")
 FILEPATH = "entry.csv"
 
-db = harperdb.HarperDB(
-    url=HARPERDB_URL,
-    username=HARPERDB_USERNAME,
-    password=HARPERDB_PASSWORD,
-)
+def load_csv_to_mongodb():
+    # MongoDBクライアントの初期化
+    client = MongoClient(
+        MONGODB_CONNECTION_STRING,
+        tls=True,
+        retryWrites=True,
+        serverSelectionTimeoutMS=30000
+    )
 
-db.csv_data_load(HARPERDB_SCHEMA, "entry_urls", FILEPATH, action="upsert")
+    # データベースとコレクションの取得
+    db = client[DATABASE]
+    collection = db.entry_urls
+
+    # CSVファイルの読み込み
+    df = pd.read_csv(FILEPATH)
+
+    # データをMongoDBのドキュメント形式に変換
+    documents = df.to_dict('records')
+
+    # upsert処理の実行
+    for doc in documents:
+        collection.update_one(
+            {"name": doc["name"]},
+            {"$set": doc},
+            upsert=True
+        )
+
+    client.close()
+
+if __name__ == "__main__":
+    load_csv_to_mongodb()
