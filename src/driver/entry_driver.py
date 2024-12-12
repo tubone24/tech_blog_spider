@@ -137,6 +137,8 @@ class EntryDriverImpl(EntryDriver):
     def _get_html(self, link: str):
         print("aaaaaaaaaaaaaaa!!!!!!!")
         print(link)
+        if link is None or link == "":
+            return ""
         try:
             return self.http.get(link)
         except requests.exceptions.RequestException as e:
