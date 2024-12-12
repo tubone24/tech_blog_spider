@@ -14,7 +14,7 @@ client = MongoClient(
     tls=True,
     tlsCAFile=certifi.where(),
     serverSelectionTimeoutMS=5000,
-    retryWrites=True
+    retryWrites=True,
 )
 
 try:
@@ -23,7 +23,7 @@ try:
     collection = db.last_published
 
     # すべてのドキュメントを取得
-    last_published = list(collection.find({}, {'_id': 0}))
+    last_published = list(collection.find({}, {"_id": 0}))
 
     # JSONファイルに保存
     with open(FILEPATH, "w") as f:
