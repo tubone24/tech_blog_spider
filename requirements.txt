@@ -9,3 +9,4 @@ beautifulsoup4==4.11.1
 nltk==3.7
 black==22.8.0
 PyYAML==6.0
+pymongo==4.0.1

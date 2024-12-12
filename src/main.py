@@ -14,7 +14,6 @@ from driver.keyword_driver import KeywordDriverImpl
 from driver.slack_driver import SlackDriverImpl
 from output.slack_output import SlackOutputImpl
 from util.http import HttpImpl
-from util.harperdb import HarperDBImpl
 from util.logger import AppLog
 
 
@@ -24,6 +23,7 @@ HARPERDB_URL = os.getenv("HARPERDB_URL")
 HARPERDB_USERNAME = os.getenv("HARPERDB_USERNAME")
 HARPERDB_PASSWORD = os.getenv("HARPERDB_PASSWORD")
 HARPERDB_SCHEMA = os.getenv("HARPERDB_SCHEMA", "prd")
+MONGODB_CONNECTION_STRING = os.getenv("MONGODB_CONNECTION_STRING")
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 SLEEP_TIME = float(os.getenv("SLEEP_TIME", "1"))
 
@@ -34,12 +34,7 @@ def main():
         feed_usecase=FeedUsecaseImpl(
             feed_repository=FeedRepositoryImpl(
                 feed_driver=FeedDriverImpl(
-                    db=HarperDBImpl(
-                        url=HARPERDB_URL,
-                        username=HARPERDB_USERNAME,
-                        password=HARPERDB_PASSWORD,
-                    ).get_instance(),
-                    schema=HARPERDB_SCHEMA,
+                    connection_string=MONGODB_CONNECTION_STRING,
                 ),
                 favicon_driver=FaviconDriverImpl(),
             )
