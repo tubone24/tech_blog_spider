@@ -21,7 +21,6 @@ class FeedDriverImpl(FeedDriver):
             minPoolSize=1,
             maxIdleTimeMS=30000,
             heartbeatFrequencyMS=30000,
-            directConnection=True,
         )
         self.db = self.client[database]
         self.entry_urls = self.db.entry_urls

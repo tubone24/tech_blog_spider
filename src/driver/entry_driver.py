@@ -135,6 +135,8 @@ class EntryDriverImpl(EntryDriver):
 
     @retry(wait_exponential_multiplier=1000, wait_exponential_max=4000)
     def _get_html(self, link: str):
+        print("aaaaaaaaaaaaaaa!!!!!!!")
+        print(link)
         try:
             return self.http.get(link)
         except requests.exceptions.RequestException as e:
@@ -144,3 +146,6 @@ class EntryDriverImpl(EntryDriver):
                 return ""
             else:
                 raise e
+        except Exception as e:
+            _logger.error(e)
+            return ""
