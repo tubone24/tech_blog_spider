@@ -317,13 +317,13 @@ all = ["flake8 (>=7.1.1)", "mypy (>=1.11.2)", "pytest (>=8.3.2)", "ruff (>=0.6.2
 
 [[package]]
 name = "janome"
-version = "0.4.2"
+version = "0.5.0"
 description = "Japanese morphological analysis engine."
 optional = false
 python-versions = "*"
 files = [
-    {file = "Janome-0.4.2-py2.py3-none-any.whl", hash = "sha256:d292e458aa8a72b4aae51ae1e0cd91bf463beb95ad1ec118be7aab87eea1a454"},
-    {file = "Janome-0.4.2.tar.gz", hash = "sha256:14c31bbfc11724da299b4b71a06bccb3af9a105e7c912bc38a22132d8991ec97"},
+    {file = "Janome-0.5.0-py2.py3-none-any.whl", hash = "sha256:d098670394a77881ce2f6b7d696c0ea5ff74c0c8cf74a8a882159ec82c0e6dc7"},
+    {file = "Janome-0.5.0.tar.gz", hash = "sha256:ce4a3ed7a4635c2f80139639327d5b1e0381858ad74a3c4a61e8cc83f820400e"},
 ]
 
 [[package]]
@@ -845,4 +845,4 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "d93bd6b154578e0eb04cbe62cbc349b7b0e27e0c86386be7c515e15453d4e9d3"
+content-hash = "e37b120cff9164c4fca818d4a2944fd18e8e915bf67b35d049d9ebb496892d32"
