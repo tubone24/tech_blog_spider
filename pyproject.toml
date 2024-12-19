@@ -17,7 +17,7 @@ janome = "0.4.2"
 beautifulsoup4 = "4.11.1"
 nltk = "3.7"
 black = "22.8.0"
-pyyaml = "6.0"
+pyyaml = "6.0.2"
 pymongo = {extras = ["srv"], version = "^4.10.1"}
 numpy = "<2"
 pybind11 = "^2.13.6"
