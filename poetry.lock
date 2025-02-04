@@ -2,13 +2,13 @@
 
 [[package]]
 name = "beautifulsoup4"
-version = "4.13.1"
+version = "4.13.3"
 description = "Screen-scraping library"
 optional = false
 python-versions = ">=3.7.0"
 files = [
-    {file = "beautifulsoup4-4.13.1-py3-none-any.whl", hash = "sha256:72465267014897bb10ca749bb632bde6c2d20f3254afd5458544bd74e6c2e6d8"},
-    {file = "beautifulsoup4-4.13.1.tar.gz", hash = "sha256:741c8b6903a1e4ae8ba32b9c9ae7510dab7a197fdbadcf9fcdeb0891ef5ec66a"},
+    {file = "beautifulsoup4-4.13.3-py3-none-any.whl", hash = "sha256:99045d7d3f08f91f0d656bc9b7efbae189426cd913d830294a15eefa0ea4df16"},
+    {file = "beautifulsoup4-4.13.3.tar.gz", hash = "sha256:1bd32405dacc920b42b83ba01644747ed77456a65760e285fbc47633ceddaf8b"},
 ]
 
 [package.dependencies]
@@ -931,4 +931,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "095f6bb03a787aa8e1fee1e928be1bc3cd49b12e7f8f58590de74f7188d2d370"
+content-hash = "13efa45de0ceb863ea7e8cfa183748d3603718c9e84e1fbc836ee73824c45ae1"
