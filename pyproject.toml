@@ -16,7 +16,7 @@ favicon = "0.7.0"
 retrying = "1.3.4"
 janome = "0.5.0"
 beautifulsoup4 = "4.13.3"
-nltk = "3.7"
+nltk = "3.9"
 black = "22.8.0"
 pyyaml = "6.0.2"
 pymongo = {extras = ["srv"], version = "^4.10.1"}
