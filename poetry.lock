@@ -827,13 +827,13 @@ use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "retrying"
-version = "1.3.5"
+version = "1.4.0"
 description = "Retrying"
 optional = false
-python-versions = "*"
+python-versions = ">=3.6"
 files = [
-    {file = "retrying-1.3.5-py3-none-any.whl", hash = "sha256:8b5093743188752de37c5e6b21485d87c0b0762b51947ac66658863643ce1d8d"},
-    {file = "retrying-1.3.5.tar.gz", hash = "sha256:13859d82b786d6d76df33d59a2372623deed45d57028018092dec612c45064d8"},
+    {file = "retrying-1.4.0-py3-none-any.whl", hash = "sha256:6509d829c70271937605bce361c8f76e91f9123d355d14df7dc6972b1518064a"},
+    {file = "retrying-1.4.0.tar.gz", hash = "sha256:efa99c78bf4fbdbe6f0cba4101470fbc684b93d30ca45ffa1288443a9805172f"},
 ]
 
 [[package]]
@@ -929,4 +929,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "fd2795d506e20ffb5b03b50bcf884976806e7fdb4ad26292fd501bd3d186a087"
+content-hash = "b56f429e3fd19d675df1b37f73a26bcf59e9900ddc1ffcea5e369bd3b4418c27"
