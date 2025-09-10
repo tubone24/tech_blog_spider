@@ -535,17 +535,17 @@ type = ["mypy (>=1.14.1)"]
 
 [[package]]
 name = "pybind11"
-version = "2.13.6"
+version = "3.0.1"
 description = "Seamless operability between C++11 and Python"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "pybind11-2.13.6-py3-none-any.whl", hash = "sha256:237c41e29157b962835d356b370ededd57594a26d5894a795960f0047cb5caf5"},
-    {file = "pybind11-2.13.6.tar.gz", hash = "sha256:ba6af10348c12b24e92fa086b39cfba0eff619b61ac77c406167d813b096d39a"},
+    {file = "pybind11-3.0.1-py3-none-any.whl", hash = "sha256:aa8f0aa6e0a94d3b64adfc38f560f33f15e589be2175e103c0a33c6bce55ee89"},
+    {file = "pybind11-3.0.1.tar.gz", hash = "sha256:9c0f40056a016da59bab516efb523089139fcc6f2ba7e4930854c61efb932051"},
 ]
 
 [package.extras]
-global = ["pybind11-global (==2.13.6)"]
+global = ["pybind11-global (==3.0.1)"]
 
 [[package]]
 name = "pymongo"
@@ -909,4 +909,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "0480fb093decdbc3168b676b27401fb3b38837bd2d29a6f1213e7b863e0b8ca6"
+content-hash = "188fd284fc1bd97f596e01ad86a6a019eae69ff1e85332651e23b13886f3b100"
