@@ -24,6 +24,15 @@ numpy = "<2"
 pybind11 = "^2.13.6"
 fasttext-wheel = "^0.9.2"
 
+[tool.poetry.group.test.dependencies]
+pytest = "^8.0.0"
+pytest-cov = "^6.0.0"
+pytest-mock = "^3.14.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-v --cov=src --cov-report=term-missing --cov-report=html"
 
 [build-system]
 requires = ["poetry-core"]

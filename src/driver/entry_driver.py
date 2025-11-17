@@ -135,8 +135,7 @@ class EntryDriverImpl(EntryDriver):
 
     @retry(wait_exponential_multiplier=1000, wait_exponential_max=4000)
     def _get_html(self, link: str):
-        print("aaaaaaaaaaaaaaa!!!!!!!")
-        print(link)
+        _logger.debug(f"Getting HTML from: {link}")
         if link is None or link == "":
             return ""
         try:

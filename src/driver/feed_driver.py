@@ -3,6 +3,9 @@ from typing import Dict, List, Union
 from pymongo import MongoClient
 from interface.driver.feed_driver import FeedDriver
 from pymongo.errors import ServerSelectionTimeoutError
+from util.logger import AppLog
+
+_logger = AppLog(__name__)
 
 U = Union[str, int]
 
@@ -31,7 +34,7 @@ class FeedDriverImpl(FeedDriver):
         try:
             self.client.admin.command({"ping": 1, "maxTimeMS": 30000})
         except ServerSelectionTimeoutError:
-            print("サーバー選択がタイムアウトしました")
+            _logger.error("Server selection timeout error")
             self.client.close()
             raise ServerSelectionTimeoutError
 
