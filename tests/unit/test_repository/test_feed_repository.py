@@ -109,9 +109,7 @@ class TestFeedRepositoryImpl:
                 "time": 1700000000,
             }
         ]
-        mock_favicon_driver.get_favicon.return_value = (
-            "https://example.com/favicon.ico"
-        )
+        mock_favicon_driver.get_favicon.return_value = "https://example.com/favicon.ico"
 
         # Execute
         result = feed_repository.get_all_feeds()
@@ -142,10 +140,7 @@ class TestFeedRepositoryImpl:
         assert len(result) == 1
         expected_time = datetime.now() - timedelta(days=30)
         # Allow 1 minute tolerance for test execution time
-        assert (
-            result[0].last_published_datetime
-            >= expected_time - timedelta(minutes=1)
-        )
+        assert result[0].last_published_datetime >= expected_time - timedelta(minutes=1)
         assert result[0].last_published_datetime <= after_execution
 
     def test_get_all_feeds_with_empty_time(
@@ -167,10 +162,7 @@ class TestFeedRepositoryImpl:
         # Assert - should set time to 30 days ago
         assert len(result) == 1
         expected_time = datetime.now() - timedelta(days=30)
-        assert (
-            result[0].last_published_datetime
-            >= expected_time - timedelta(minutes=1)
-        )
+        assert result[0].last_published_datetime >= expected_time - timedelta(minutes=1)
 
     def test_update_last_published(self, feed_repository, mock_feed_driver):
         # Setup
@@ -252,9 +244,7 @@ class TestFeedRepositoryImpl:
         # Third blog - missing time
         assert result[2].name == "New Blog"
         expected_time = datetime.now() - timedelta(days=30)
-        assert result[2].last_published_datetime >= expected_time - timedelta(
-            minutes=1
-        )
+        assert result[2].last_published_datetime >= expected_time - timedelta(minutes=1)
 
         # Favicon driver called once for missing icon
         mock_favicon_driver.get_favicon.assert_called_once()

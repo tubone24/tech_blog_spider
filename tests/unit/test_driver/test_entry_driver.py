@@ -159,9 +159,7 @@ class TestEntryDriverImpl:
         mock_feed.entries = [mock_entry]
         mock_feedparser.parse.return_value = mock_feed
 
-        mock_http.get.return_value = (
-            "<html><body><p>This is a long article content that should be truncated</p></body></html>"
-        )
+        mock_http.get.return_value = "<html><body><p>This is a long article content that should be truncated</p></body></html>"
 
         # Execute
         result = entry_driver.get_until_last_published_entries(
