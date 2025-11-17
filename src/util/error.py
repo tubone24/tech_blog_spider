@@ -1,14 +1,14 @@
-class EmptyLastPublishedRecordError(BaseException):
+class EmptyLastPublishedRecordError(Exception):
     pass
 
 
-class DeclarationDuplicateInstanceError(BaseException):
+class DeclarationDuplicateInstanceError(Exception):
     pass
 
 
-class NoPublishDateError(BaseException):
+class NoPublishDateError(Exception):
     pass
 
 
-class NoEntrySummaryError(BaseException):
+class NoEntrySummaryError(Exception):
     pass
