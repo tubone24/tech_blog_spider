@@ -1,15 +1,15 @@
 [
   {
     "name": "aws",
-    "time": 1765816925
+    "time": 1769444746
   },
   {
     "name": "classmethod",
-    "time": 1767567600
+    "time": 1769877281
   },
   {
     "name": "sakura",
-    "time": 1766628000
+    "time": 1769565600
   },
   {
     "name": "heartbeats",
@@ -21,7 +21,7 @@
   },
   {
     "name": "voyage",
-    "time": 1766671823
+    "time": 1769055748
   },
   {
     "name": "google",
@@ -33,19 +33,19 @@
   },
   {
     "name": "LINE",
-    "time": 1766551200
+    "time": 1769652000
   },
   {
     "name": "DeNA",
-    "time": 1766415600
+    "time": 1772722800
   },
   {
     "name": "GREE",
-    "time": 1765260391
+    "time": 1768795507
   },
   {
     "name": "CyberAgent",
-    "time": 1766736969
+    "time": 1769581100
   },
   {
     "name": "cookpadTech",
@@ -53,7 +53,7 @@
   },
   {
     "name": "hatena",
-    "time": 1767193140
+    "time": 1769681368
   },
   {
     "name": "mixi",
@@ -69,7 +69,7 @@
   },
   {
     "name": "nulab",
-    "time": 1766630117
+    "time": 1769749230
   },
   {
     "name": "Techscore",
@@ -77,15 +77,15 @@
   },
   {
     "name": "yahoo",
-    "time": 1766551200
+    "time": 1769652000
   },
   {
     "name": "wantedly",
-    "time": 1766736012
+    "time": 1769677762
   },
   {
     "name": "Chatwork",
-    "time": 1766643865
+    "time": 1769481000
   },
   {
     "name": "GMOgroup",
@@ -101,15 +101,15 @@
   },
   {
     "name": "LIFULL",
-    "time": 1766199600
+    "time": 1768522200
   },
   {
     "name": "sansan",
-    "time": 1766736000
+    "time": 1769734800
   },
   {
     "name": "zozo",
-    "time": 1766730600
+    "time": 1769738400
   },
   {
     "name": "askul",
@@ -117,7 +117,7 @@
   },
   {
     "name": "awsJapan",
-    "time": 1767070642
+    "time": 1769834467
   },
   {
     "name": "eureka",
@@ -125,7 +125,7 @@
   },
   {
     "name": "m3",
-    "time": 1766736000
+    "time": 1769596200
   },
   {
     "name": "kayac",
@@ -137,15 +137,15 @@
   },
   {
     "name": "cybozu",
-    "time": 1766716200
+    "time": 1769653800
   },
   {
     "name": "pixiv",
-    "time": 1766719800
+    "time": 1769493600
   },
   {
     "name": "biglobe",
-    "time": 1766538000
+    "time": 1768352400
   },
   {
     "name": "moneyforward",
@@ -177,23 +177,23 @@
   },
   {
     "name": "base",
-    "time": 1766655299
+    "time": 1769738400
   },
   {
     "name": "every",
-    "time": 1766718000
+    "time": 1769745356
   },
   {
     "name": "findy",
-    "time": 1763595000
+    "time": 1767828600
   },
   {
     "name": "freee",
-    "time": 1766620800
+    "time": 1769751269
   },
   {
     "name": "GameWith",
-    "time": 1766658231
+    "time": 1769731200
   },
   {
     "name": "GMOad",
@@ -201,7 +201,7 @@
   },
   {
     "name": "GMOpepabo",
-    "time": 1766674800
+    "time": 1769094000
   },
   {
     "name": "appbrew",
@@ -209,7 +209,7 @@
   },
   {
     "name": "LIVESENSE",
-    "time": 1766635200
+    "time": 1768950000
   },
   {
     "name": "connehito",
@@ -221,7 +221,7 @@
   },
   {
     "name": "uzabase",
-    "time": 1766749070
+    "time": 1767673783
   },
   {
     "name": "paiza",
@@ -229,7 +229,7 @@
   },
   {
     "name": "qiita",
-    "time": 1766736101
+    "time": 1769570119
   },
   {
     "name": "retty",
@@ -241,7 +241,7 @@
   },
   {
     "name": "SMARTHR",
-    "time": 1765011719
+    "time": 1769752800
   },
   {
     "name": "speee",
@@ -249,11 +249,11 @@
   },
   {
     "name": "Studyplus",
-    "time": 1766707200
+    "time": 1769558400
   },
   {
     "name": "BPS",
-    "time": 1766737849
+    "time": 1769761820
   },
   {
     "name": "techscore",
@@ -269,7 +269,7 @@
   },
   {
     "name": "yappli",
-    "time": 1766660400
+    "time": 1769739907
   },
   {
     "name": "zaim",
@@ -277,15 +277,15 @@
   },
   {
     "name": "curama",
-    "time": 1721878665
+    "time": 1769413511
   },
   {
     "name": "grunavi",
-    "time": 1766631600
+    "time": 1769414400
   },
   {
     "name": "toranoana",
-    "time": 1766977200
+    "time": 1769655600
   },
   {
     "name": "yumemi",
@@ -305,7 +305,7 @@
   },
   {
     "name": "crowdworks",
-    "time": 1766284951
+    "time": 1769475749
   },
   {
     "name": "kurashicom",
@@ -317,7 +317,7 @@
   },
   {
     "name": "Quipper",
-    "time": 1766361600
+    "time": 1767571200
   },
   {
     "name": "SMARTCAMP",
@@ -325,7 +325,7 @@
   },
   {
     "name": "SonicGarden",
-    "time": 1767205827
+    "time": 1769793496
   },
   {
     "name": "locoguide",
@@ -341,19 +341,19 @@
   },
   {
     "name": "Visional",
-    "time": 1766629800
+    "time": 1769740200
   },
   {
     "name": "feedforce",
-    "time": 1765587065
+    "time": 1769655505
   },
   {
     "name": "plaid",
-    "time": 1764733365
+    "time": 1768960526
   },
   {
     "name": "mirrativ",
-    "time": 1765933200
+    "time": 1769475600
   },
   {
     "name": "medpeer",
@@ -361,11 +361,11 @@
   },
   {
     "name": "mobilefactory",
-    "time": 1766475000
+    "time": 1768953600
   },
   {
     "name": "rakus",
-    "time": 1766709416
+    "time": 1769734800
   },
   {
     "name": "raksul",
@@ -373,7 +373,7 @@
   },
   {
     "name": "recochoku",
-    "time": 1766588442
+    "time": 1769738799
   },
   {
     "name": "aimstogeek",
@@ -397,11 +397,11 @@
   },
   {
     "name": "future",
-    "time": 1766934000
+    "time": 1769698800
   },
   {
     "name": "DENET",
-    "time": 1766977239
+    "time": 1769752180
   },
   {
     "name": "SEGA",
@@ -409,11 +409,11 @@
   },
   {
     "name": "fltech",
-    "time": 1766718000
+    "time": 1769734800
   },
   {
     "name": "SHIFT",
-    "time": 1766703600
+    "time": 1769765237
   },
   {
     "name": "chromium",
@@ -421,7 +421,7 @@
   },
   {
     "name": "cloudflare",
-    "time": 1766412000
+    "time": 1769792464
   },
   {
     "name": "atlassian",
@@ -429,7 +429,7 @@
   },
   {
     "name": "googlechrome",
-    "time": 1766422800
+    "time": 1769623200
   },
   {
     "name": "heroku",
@@ -445,7 +445,7 @@
   },
   {
     "name": "gcpJP",
-    "time": 1764550800
+    "time": 1768788000
   },
   {
     "name": "uber",
@@ -453,27 +453,27 @@
   },
   {
     "name": "spotify",
-    "time": 1765293259
+    "time": 1769094025
   },
   {
     "name": "publickey",
-    "time": 1766503036
+    "time": 1769700024
   },
   {
     "name": "oreilly",
-    "time": 1769094000
+    "time": 1771945200
   },
   {
     "name": "infoq",
-    "time": 1766482200
+    "time": 1769736600
   },
   {
     "name": "github",
-    "time": 1767115210
+    "time": 1769619600
   },
   {
     "name": "facebook",
-    "time": 1766412016
+    "time": 1769526009
   },
   {
     "name": "linkedin",
@@ -489,11 +489,11 @@
   },
   {
     "name": "Pinterest",
-    "time": 1765396931
+    "time": 1769641263
   },
   {
     "name": "airbnb",
-    "time": 1761843714
+    "time": 1769623460
   },
   {
     "name": "dazn",
@@ -517,11 +517,11 @@
   },
   {
     "name": "stackoverflow",
-    "time": 1767193647
+    "time": 1769762400
   },
   {
     "name": "ebay",
-    "time": 1764057600
+    "time": 1768550400
   },
   {
     "name": "fastly",
@@ -533,7 +533,7 @@
   },
   {
     "name": "datadog",
-    "time": 1759363200
+    "time": 1762732800
   },
   {
     "name": "newrelic",
@@ -541,27 +541,27 @@
   },
   {
     "name": "hashicorp",
-    "time": 1767027600
+    "time": 1769619600
   },
   {
     "name": "ciscojp",
-    "time": 1766731952
+    "time": 1769058026
   },
   {
     "name": "cloudconfig",
-    "time": 1764547200
+    "time": 1767225600
   },
   {
     "name": "monotaro",
-    "time": 1766448000
+    "time": 1769040000
   },
   {
     "name": "optim",
-    "time": 1766624400
+    "time": 1769562000
   },
   {
     "name": "raccoon",
-    "time": 1764823960
+    "time": 1769900451
   },
   {
     "name": "cci",
@@ -569,7 +569,7 @@
   },
   {
     "name": "dropbox",
-    "time": 1766080800
+    "time": 1769623200
   },
   {
     "name": "ikyu",
@@ -585,7 +585,7 @@
   },
   {
     "name": "kakakakakku",
-    "time": 1767167405
+    "time": 1769644479
   },
   {
     "name": "tuboneproject",
@@ -597,15 +597,15 @@
   },
   {
     "name": "csstricks",
-    "time": 1767197903
+    "time": 1769785226
   },
   {
     "name": "cloudpack",
-    "time": 1766732456
+    "time": 1769760051
   },
   {
     "name": "redhat",
-    "time": 1766667742
+    "time": 1769563569
   },
   {
     "name": "nyle",
@@ -613,7 +613,7 @@
   },
   {
     "name": "macloud",
-    "time": 1764149764
+    "time": 1769739704
   },
   {
     "name": "gaudiy",
@@ -621,23 +621,23 @@
   },
   {
     "name": "andpad",
-    "time": 1766711700
+    "time": 1769745600
   },
   {
     "name": "sms",
-    "time": 1766628000
+    "time": 1768874400
   },
   {
     "name": "AIShift",
-    "time": 1766620743
+    "time": 1769418839
   },
   {
     "name": "kakehashi",
-    "time": 1766715225
+    "time": 1769747400
   },
   {
     "name": "nhntechorus",
-    "time": 1766630293
+    "time": 1769498517
   },
   {
     "name": "gmogshd",
@@ -645,11 +645,11 @@
   },
   {
     "name": "buysell",
-    "time": 1766122472
+    "time": 1769482800
   },
   {
     "name": "g-gen",
-    "time": 1766707200
+    "time": 1769644800
   },
   {
     "name": "cpuinfo",
@@ -657,15 +657,15 @@
   },
   {
     "name": "stmn",
-    "time": 1766629488
+    "time": 1769137426
   },
   {
     "name": "bookwalker",
-    "time": 1752568371
+    "time": 1769659145
   },
   {
     "name": "repro",
-    "time": 1764317534
+    "time": 1769731195
   },
   {
     "name": "colopl",
@@ -681,15 +681,15 @@
   },
   {
     "name": "jmdc",
-    "time": 1766613600
+    "time": 1769392800
   },
   {
     "name": "abeja",
-    "time": 1766644015
+    "time": 1769753448
   },
   {
     "name": "aptpod",
-    "time": 1766624400
+    "time": 1769151600
   },
   {
     "name": "aumo",
@@ -701,11 +701,11 @@
   },
   {
     "name": "techtouch",
-    "time": 1759190400
+    "time": 1768953600
   },
   {
     "name": "dd_techblog",
-    "time": 1766121503
+    "time": 1769563800
   },
   {
     "name": "morphoinc",
@@ -713,7 +713,7 @@
   },
   {
     "name": "amdlaboratory",
-    "time": 1763422916
+    "time": 1768798813
   },
   {
     "name": "monoxer",
@@ -729,11 +729,11 @@
   },
   {
     "name": "meetsmore",
-    "time": 1766653456
+    "time": 1769683053
   },
   {
     "name": "s-style",
-    "time": 1766658359
+    "time": 1769759182
   },
   {
     "name": "fundely",
@@ -741,7 +741,7 @@
   },
   {
     "name": "isid",
-    "time": 1766700000
+    "time": 1769724000
   },
   {
     "name": "assured",
@@ -749,7 +749,7 @@
   },
   {
     "name": "hpc",
-    "time": 1762308340
+    "time": 1769475879
   },
   {
     "name": "furyu",
@@ -757,11 +757,11 @@
   },
   {
     "name": "forstartups",
-    "time": 1766444400
+    "time": 1769382000
   },
   {
     "name": "willgate",
-    "time": 1766630700
+    "time": 1769396400
   },
   {
     "name": "readyfor",
@@ -769,7 +769,7 @@
   },
   {
     "name": "jbs",
-    "time": 1766980529
+    "time": 1769737488
   },
   {
     "name": "jcblab",
@@ -777,7 +777,7 @@
   },
   {
     "name": "tver",
-    "time": 1766623144
+    "time": 1769389200
   },
   {
     "name": "weseek",
@@ -801,7 +801,7 @@
   },
   {
     "name": "kcme",
-    "time": 1766482715
+    "time": 1769468426
   },
   {
     "name": "retrieva",
@@ -809,7 +809,7 @@
   },
   {
     "name": "mntsq",
-    "time": 1766117005
+    "time": 1769074357
   },
   {
     "name": "bitbank",
@@ -829,7 +829,7 @@
   },
   {
     "name": "studist",
-    "time": 1758858485
+    "time": 1767859722
   },
   {
     "name": "miracleave",
@@ -837,11 +837,11 @@
   },
   {
     "name": "motex",
-    "time": 1766728653
+    "time": 1769563870
   },
   {
     "name": "legalforce",
-    "time": 1766962800
+    "time": 1768366362
   },
   {
     "name": "cccmk",
@@ -853,15 +853,15 @@
   },
   {
     "name": "quickguard",
-    "time": 1762909200
+    "time": 1767834000
   },
   {
     "name": "layerx",
-    "time": 1766711126
+    "time": 1769754096
   },
   {
     "name": "revcomm",
-    "time": 1766630745
+    "time": 1767841200
   },
   {
     "name": "finatext",
@@ -869,15 +869,15 @@
   },
   {
     "name": "nearme",
-    "time": 1751259454
+    "time": 1767841889
   },
   {
     "name": "jser",
-    "time": 1767065043
+    "time": 1769421109
   },
   {
     "name": "goodpatch",
-    "time": 1766710900
+    "time": 1769727626
   },
   {
     "name": "mugenup",
@@ -905,11 +905,11 @@
   },
   {
     "name": "thoughtbot",
-    "time": 1767052800
+    "time": 1769644800
   },
   {
     "name": "honeybadger",
-    "time": 1766016000
+    "time": 1769472000
   },
   {
     "name": "lyft",
@@ -921,18 +921,18 @@
   },
   {
     "name": "zenn_trend",
-    "time": 1767182601
+    "time": 1769857095
   },
   {
     "name": "qiita_trend",
-    "time": 1767194282
+    "time": 1769869057
   },
   {
     "name": "nodeweekly",
-    "time": 1765843200
+    "time": 1769644800
   },
   {
     "name": "thinkit",
-    "time": 1767091352
+    "time": 1769722200
   }
 ]
