@@ -754,18 +754,18 @@ testing = ["coverage", "pytest", "pytest-benchmark"]
 
 [[package]]
 name = "pybind11"
-version = "2.13.6"
+version = "3.0.4"
 description = "Seamless operability between C++11 and Python"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "pybind11-2.13.6-py3-none-any.whl", hash = "sha256:237c41e29157b962835d356b370ededd57594a26d5894a795960f0047cb5caf5"},
-    {file = "pybind11-2.13.6.tar.gz", hash = "sha256:ba6af10348c12b24e92fa086b39cfba0eff619b61ac77c406167d813b096d39a"},
+    {file = "pybind11-3.0.4-py3-none-any.whl", hash = "sha256:961720ee652da51d531b7b2451a6bd2bc042b0106e6d9baa48ecb7d58034ce63"},
+    {file = "pybind11-3.0.4.tar.gz", hash = "sha256:3286b59c8a774b9ee650169302dd5a4eedc30a8617905a0560dd8ee44775130c"},
 ]
 
 [package.extras]
-global = ["pybind11-global (==2.13.6)"]
+global = ["pybind11-global (==3.0.4)"]
 
 [[package]]
 name = "pygments"
@@ -1276,4 +1276,4 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "617d3b0fb9f5a6723d30916823a0990aaaca4f9f83b22d2fa5a5452e34cb6eaa"
+content-hash = "250167d9e0bbdc0d1ff0298466c0111cfbe8dbc586aa6349cdeba9000ee79abb"
