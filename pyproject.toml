@@ -9,7 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 harperdb = "0.4.2"
-feedparser = "6.0.13"
+feedparser = "6.0.14"
 requests = "2.34.2"
 opengraph-py3 = "0.71"
 favicon = "0.7.0"
