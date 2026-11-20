@@ -661,14 +661,14 @@ files = [
 
 [[package]]
 name = "janome"
-version = "0.5.0"
-description = "Japanese morphological analysis engine."
+version = "0.5.2"
+description = "Janome is a Japanese morphological analysis engine written in pure Python."
 optional = false
-python-versions = "*"
+python-versions = ">=3.11"
 groups = ["main"]
 files = [
-    {file = "Janome-0.5.0-py2.py3-none-any.whl", hash = "sha256:d098670394a77881ce2f6b7d696c0ea5ff74c0c8cf74a8a882159ec82c0e6dc7"},
-    {file = "Janome-0.5.0.tar.gz", hash = "sha256:ce4a3ed7a4635c2f80139639327d5b1e0381858ad74a3c4a61e8cc83f820400e"},
+    {file = "janome-0.5.2-py3-none-any.whl", hash = "sha256:216c78e3f24ae5f25a20a5e3b4386432f4b85b3a4c367fb485dd849b866ce1eb"},
+    {file = "janome-0.5.2.tar.gz", hash = "sha256:53ba04aa68f0a35410db418936460ab66764ac5621c655080c5f5a58b99f83ed"},
 ]
 
 [[package]]
@@ -1354,4 +1354,4 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "673264308334da5e2e8cdbb0367d18780dfdb9e6db996fc854c0d1c703ab9278"
+content-hash = "e0fc6213834f73712bd439967a865af36df03311c74d0a52a606075d866dfcb1"
